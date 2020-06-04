@@ -1,0 +1,187 @@
+@inproceedings{Kikas2017,
+abstract = {Software developers often include available open-source software packages into their projects to minimize redundant effort. However, adding a package to a project can also introduce risks, which can propagate through multiple levels of dependencies. Currently, not much is known about the structure of open-source package ecosystems of popular programming languages and the extent to which transitive bug propagation is possible. This paper analyzes the dependency network structure and evolution of the JavaScript, Ruby, and Rust ecosystems. The reported results reveal significant differences across language ecosystems. The results indicate that the number of transitive dependencies for JavaScript has grown 60{\%} over the last year, suggesting that developers should look more carefully into their dependencies to understand what exactly is included. The study also reveals that vulnerability to a removal of the most popular package is increasing, yet most other packages have a decreasing impact on vulnerability. The findings of this study can inform the development of dependency management tools.},
+author = {Kikas, Riivo and Gousios, Georgios and Dumas, Marlon and Pfahl, Dietmar},
+booktitle = {IEEE International Working Conference on Mining Software Repositories},
+doi = {10.1109/MSR.2017.55},
+isbn = {9781538615447},
+issn = {21601860},
+keywords = {Dependency Management,Mining Software Repositories,Software Ecosystems,Software Evolution},
+title = {{Structure and evolution of package dependency networks}},
+year = {2017}
+}
+@inproceedings{Boldi2019,
+abstract = {Modern software development is increasingly dependent on components, libraries and frameworks coming from third party vendors or open-source suppliers and made available through a number of platforms (or 'forges'). This way of writing software puts an emphasis on reuse and on composition, commoditizing the services which modern applications require. On the other hand, bugs and vulnerabilities in a single library living in one such ecosystem can affect, directly or by transitivity, a huge number of other libraries and applications. Currently, only product-level information on library dependencies is used to contain this kind of danger, but this knowledge often reveals itself too imprecise to lead to effective (and possibly automated) handling policies. We will discuss how fine-grained function-level dependencies can greatly improve reliability and reduce the impact of vulnerabilities on the whole software ecosystem.},
+author = {Boldi, Paolo},
+booktitle = {Proceedings - 2019 IEEE 1st International Conference on Cognitive Machine Intelligence, CogMI 2019},
+doi = {10.1109/CogMI48466.2019.00032},
+isbn = {9781728167374},
+keywords = {Software-reuse-security-breaches-network-analysis},
+title = {{How network analysis can improve the reliability of modern software ecosystems}},
+year = {2019}
+}
+@inproceedings{Cox2015,
+abstract = {Modern software systems often make use of third-party components to speed-up development and reduce maintenance costs. In return, developers need to update to new releases of these dependencies to avoid, for example, security and compatibility risks. In practice, prioritizing these updates is difficult because the use of outdated dependencies is often opaque. In this paper we aim to make this concept more transparent by introducing metrics to quantify the use of recent versions of dependencies, i.e. The system's 'dependency freshness'. We propose and investigate a system-level metric based on an industry benchmark. We validate the usefulness of the metric using interviews, analyze the variance of the metric through time, and investigate the relationship between outdated dependencies and security vulnerabilities. The results show that the measurements are considered useful, and that systems using outdated dependencies four times as likely to have security issues as opposed to systems that are up-to-date.},
+author = {Cox, Joel and Bouwers, Eric and Eekelen, Marko Van and Visser, Joost},
+booktitle = {Proceedings - International Conference on Software Engineering},
+doi = {10.1109/ICSE.2015.140},
+isbn = {9781479919345},
+issn = {02705257},
+keywords = {Software maintenance,Software metrics},
+title = {{Measuring Dependency Freshness in Software Systems}},
+year = {2015}
+}
+@inproceedings{Wittern2016,
+abstract = {The node package manager (npm) serves as the frontend to a large repository of JavaScript-based software packages, which foster the development of currently huge amounts of server-side Node.js and client-side JavaScript applications. In a span of 6 years since its inception, npm has grown to become one of the largest software ecosystems, hosting more than 230, 000 packages, with hundreds of millions of package installations every week. In this paper, we examine the npm ecosystem from two complementary perspectives: 1) we look at package descriptions, the dependencies among them, and download metrics, and 2) we look at the use of npm packages in publicly available applications hosted on GitHub. In both perspectives, we consider historical data, providing us with a unique view on the evolution of the ecosystem. We present analyses that provide insights into the ecosystem's growth and activity, into conflicting measures of package popularity, and into the adoption of package versions over time. These insights help understand the evolution of npm, design better package recommendation engines, and can help developers understand how their packages are being used.},
+author = {Wittern, Erik and Suter, Philippe and Rajagopalan, Shriram},
+booktitle = {Proceedings - 13th Working Conference on Mining Software Repositories, MSR 2016},
+doi = {10.1145/2901739.2901743},
+isbn = {9781450341868},
+keywords = {JavaScript,Node.js,Software ecosystem analysis},
+title = {{A look at the dynamics of the JavaScript package ecosystem}},
+year = {2016}
+}
+@article{Decan2016,
+abstract = {Package-based software ecosystems are composed of thou-sands of interdependent software packages. Many empiri-cal studies have focused on software packages belonging to a single software ecosystem, and suggest to generalise the results to more ecosystems. We claim that such a general-isation is not always possible, because the technical struc-ture of software ecosystems can be very different, even if these ecosystems belong to the same domain. We confirm this claim through a study of three big and popular package-based programming language ecosystems: R's CRAN archive network, Python's PyPI distribution, and JavaScript's NPM package manager. We study and compare the structure of their package dependency graphs and reveal some impor-tant differences that may make it difficult to generalise the findings of one ecosystem to another one.},
+author = {Decan, Alexandre and Mens, Tom and Claes, Maelick},
+doi = {10.1145/2993412.3003382},
+isbn = {9781450347815},
+journal = {Proccedings of the 10th European Conference on Software Architecture Workshops},
+keywords = {JavaScript,Keywords software ecosystem,Python,R,Software architectures,component de-pendency graph,software distribution},
+title = {{On the Topology of Package Dependency Networks A Comparison of Three Programming Language Ecosystems}},
+year = {2016}
+}
+@inproceedings{Decan2017,
+abstract = {Nearly every popular programming language comes with one or more open source software packaging ecosystem(s), containing a large collection of interdependent software packages developed in that programming language. Such packaging ecosystems are extremely useful for their respective software development community. We present an empirical analysis of how the dependency graphs of three large packaging ecosystems (npm, CRAN and RubyGems) evolve over time. We study how the existing package dependencies impact the resilience of the three ecosystems over time and to which extent these ecosystems suffer from issues related to package dependency updates. We analyse specific solutions that each ecosystem has put into place and argue that none of these solutions is perfect, motivating the need for better tools to deal with package dependency update problems.},
+author = {Decan, Alexandre and Mens, Tom and Claes, Maelick},
+booktitle = {SANER 2017 - 24th IEEE International Conference on Software Analysis, Evolution, and Reengineering},
+doi = {10.1109/SANER.2017.7884604},
+isbn = {9781509055012},
+keywords = {package dependency management,software distribution,software ecosystem,software evolution,software repository mining},
+title = {{An empirical comparison of dependency issues in OSS packaging ecosystems}},
+year = {2017}
+}
+@inproceedings{Bogart2016,
+abstract = {Dependencies among software projects and libraries are an indicator of the often implicit collaboration among many developers in software ecosystems. Negotiating change can be tricky: changes to one module may cause ripple effects to many other modules that depend on it, yet insisting on only backward-compatible changes may incur significant opportunity cost and stifle change. We argue that awareness mechanisms based on various notions of stability can enable developers to make decisions that are independent yet wise and provide stewardship rather than disruption to the ecosystem. In ongoing interviews with developers in two software ecosystems (CRAN and Node.js), we are finding that developers in fact struggle with change, that they often use adhoc mechanisms to negotiate change, and that existing awareness mechanisms like Github notification feeds are rarely used due to information overload. We study the state of the art and current information needs and outline a vision toward a change-based awareness system.},
+author = {Bogart, Christopher and K{\"{a}}stner, Christian and Herbsleb, James},
+booktitle = {Proceedings - 2015 30th IEEE/ACM International Conference on Automated Software Engineering Workshops, ASEW 2015},
+doi = {10.1109/ASEW.2015.21},
+isbn = {9781467397759},
+title = {{When it breaks, it breaks: How ecosystem developers reason about the stability of dependencies}},
+year = {2016}
+}
+@inproceedings{Bogart2016a,
+abstract = {Change introduces conict into software ecosystems: breaking changes may ripple through the ecosystem and trigger rework for users of a package, but often developers can invest additional effort or accept opportunity costs to alleviate or delay downstream costs. We performed a multiple case study of three software ecosystems with different tooling and philosophies toward change, Eclipse, R/CRAN, and Node.js/npm, to understand how developers make decisions about change and change-related costs and what practices, tooling, and policies are used. We found that all three ecosystems differ substantially in their practices and expectations toward change and that those differences can be explained largely by different community values in each ecosystem. Our results illustrate that there is a large design space in how to build an ecosystem, its policies and its supporting infrastructure; and there is value in making community values and accepted tradeos explicit and transparent in order to resolve conicts and negotiate change-related costs.},
+author = {Bogart, Christopher and K{\"{a}}stner, Christian and Herbsleb, James and Thung, Ferdian},
+booktitle = {Proceedings of the ACM SIGSOFT Symposium on the Foundations of Software Engineering},
+doi = {10.1145/2950290.2950325},
+isbn = {9781450342186},
+keywords = {Collaboration,Dependency Management,Qualitative Research,Semantic Versioning,Software Ecosystems},
+title = {{How to break an API: Cost negotiation and community values in three software ecosystems}},
+year = {2016}
+}
+@inproceedings{Abate2009,
+abstract = {Component-based systems often describe context requirements in terms of explicit inter-component dependencies. Studying large instances of such systems - such as free and open source software (FOSS) distributions - in terms of declared dependencies between packages is appealing. It is however also misleading when the language to express dependencies is as expressive as boolean formulae, which is often the case. In such settings, a more appropriate notion of component dependency exists: strong dependency. This paper introduces such notion as a first step towards modeling semantic, rather then syntactic, inter-component relationships. Furthermore, a notion of component sensitivity is derived from strong dependencies, with applications to quality assurance and to the evaluation of upgrade risks. An empirical study of strong dependencies and sensitivity is presented, in the context of one of the largest, freely available, component-based system. {\textcopyright} 2009 IEEE.},
+archivePrefix = {arXiv},
+arxivId = {0905.4226},
+author = {Abate, Pietro and Boender, Jaap and {Di Cosmo}, Roberto and Zacchiroli, Stefano},
+booktitle = {2009 3rd International Symposium on Empirical Software Engineering and Measurement, ESEM 2009},
+doi = {10.1109/ESEM.2009.5316017},
+eprint = {0905.4226},
+isbn = {9781424448418},
+title = {{Strong dependencies between software components}},
+year = {2009}
+}
+@inproceedings{Abate2015,
+abstract = {Component repositories play an increasingly relevant role in software life-cycle management, from software distribution to end-user, to deployment and upgrade management. Software components shipped via such repositories are equipped with rich metadata that describe their relationship (e.g., Dependencies and conflicts) with other components. In this practice paper we show how to use a tool, distcheck, that uses component metadata to identify all the components in a repository that cannot be installed (e.g., Due to unsatisfiable dependencies), provides detailed information to help developers understanding the cause of the problem, and fix it in the repository. We report about detailed analyses of several repositories: the Debian distribution, the OPAM package collection, and Drupal modules. In each case, distcheck is able to efficiently identify not installable components and provide valuable explanations of the issues. Our experience provides solid ground for generalizing the use of distcheck to other component repositories.},
+author = {Abate, Pietro and {Di Cosmo}, Roberto and Gesbert, Louis and {Le Fessant}, Fabrice and Treinen, Ralf and Zacchiroli, Stefano},
+booktitle = {IEEE International Working Conference on Mining Software Repositories},
+doi = {10.1109/MSR.2015.10},
+isbn = {9780769555942},
+issn = {21601860},
+keywords = {Component repositories,Dependency solving,Installability,Quality assurance,Software components,Software packages},
+title = {{Mining component repositories for installability issues}},
+year = {2015}
+}
+@inproceedings{Kula2018,
+abstract = {The popularity of super repositories such as Maven Central and the CRAN is a testament to software reuse activities in both open-source and commercial projects alike. However, several studies have highlighted the risks and dangers brought about by application developers keeping dependencies on outdated library versions. Intelligent mining of super repositories could reveal hidden trends within the corresponding software ecosystem and thereby provide valuable insights for such dependency-related decisions. In this paper, we propose the Software Universe Graph (SUG) Model as a structured abstraction of the evolution of software systems and their library dependencies over time. To demonstrate the SUG's usefulness, we conduct an empirical study using 6,374 Maven artifacts and over 6,509 CRAN packages mined from their real-world ecosystems. Visualizations of the SUG model such as 'library coexistence pairings' and 'dependents diffusion' uncover popularity, adoption and diffusion patterns within each software ecosystem. Results show the Maven ecosystem as having a more conservative approach to dependency updating than the CRAN ecosystem.},
+author = {Kula, Raula Gaikovina and {De Roover}, Coen and German, Daniel M. and Ishio, Takashi and Inoue, Katsuro},
+booktitle = {25th IEEE International Conference on Software Analysis, Evolution and Reengineering, SANER 2018 - Proceedings},
+doi = {10.1109/SANER.2018.8330217},
+isbn = {9781538649695},
+title = {{A generalized model for visualizing library popularity, adoption, and diffusion within a software ecosystem}},
+year = {2018}
+}
+@inproceedings{Hejderup2018,
+abstract = {A popular form of software reuse is the use of open source software libraries hosted on centralized code repositories, such as Maven or npm. Developers only need to declare dependencies to external libraries, and automated tools make them available to theworkspace of the project. Recent incidents, such as the Equifax data breach and the leftpad package removal, demonstrate the difficulty in assessing the severity, impact and spread of bugs in dependency networks. While dependency checkers are being adapted as a counter measure, they only provide indicative information. To remedy this situation, we propose a fine-grained dependency network that goes beyond packages and into call graphs. The result is a versioned ecosystemlevel call graph. In this paper,we outline the process to construct the proposed graph and present a preliminary evaluation of a security issue from a core package to an affected client application.},
+author = {Hejderup, Joseph and {Van Deursen}, Arie and Gousios, Georgios},
+booktitle = {Proceedings - International Conference on Software Engineering},
+doi = {10.1145/3183399.3183417},
+isbn = {9781450356626},
+issn = {02705257},
+title = {{Software ecosystem call graph for dependency management}},
+year = {2018}
+}
+@inproceedings{Lertwittayatrai2018,
+abstract = {Software ecosystems have had a tremendous impact on computing and society, capturing the attention of businesses, researchers, and policy makers alike. Massive ecosystems like the JavaScript node package manager (npm) is evidence of how packages are readily available for use by software projects. Due to its high-dimension and complex properties, software ecosystem analysis has been limited. In this paper, we leverage topological methods in visualize the high-dimensional datasets from a software ecosystem. Topological Data Analysis (TDA) is an emerging technique to analyze high-dimensional datasets, which enables us to study the shape of data. We generate the npm software ecosystem topology to uncover insights and extract patterns of existing libraries by studying its localities. Our real world example reveals many interesting insights and patterns that describes the shape of a software ecosystem.},
+author = {Lertwittayatrai, Nuttapon and Kula, Raula Gaikovina and Onoue, Saya and Hata, Hideaki and Rungsawang, Arnon and Leelaprute, Pattara and Matsumoto, Kenichi},
+booktitle = {Proceedings - Asia-Pacific Software Engineering Conference, APSEC},
+doi = {10.1109/APSEC.2017.36},
+isbn = {9781538636817},
+issn = {15301362},
+keywords = {Node package manager,Software library ecosystem,Topological data analysis},
+title = {{Extracting Insights from the Topology of the JavaScript Package Ecosystem}},
+year = {2018}
+}
+@inproceedings{Benelallam2019,
+abstract = {The Maven Central Repository provides an extraordinary source of data to understand complex architecture and evolution phenomena among Java applications. As of September 6, 2018, this repository includes 2.8M artifacts (compiled piece of code implemented in a JVM-based language), each of which is characterized with metadata such as exact version, date of upload and list of dependencies towards other artifacts. Today, one who wants to analyze the complete ecosystem of Maven artifacts and their dependencies faces two key challenges: (i) this is a huge data set; and (ii) dependency relationships among artifacts are not modeled explicitly and cannot be queried. In this paper, we present the Maven Dependency Graph. This open source data set provides two contributions: a snapshot of the whole Maven Central taken on September 6, 2018, stored in a graph database in which we explicitly model all dependencies; an open source infrastructure to query this huge dataset.},
+author = {Benelallam, Amine and Harrand, Nicolas and Soto-Valero, Cesar and Baudry, Benoit and Barais, Olivier},
+booktitle = {IEEE International Working Conference on Mining Software Repositories},
+doi = {10.1109/MSR.2019.00060},
+isbn = {9781728134123},
+issn = {21601860},
+keywords = {Dataset,Maven Central,Mining,Temporal Graph},
+title = {{The maven dependency graph: A temporal graph-based representation of maven central}},
+year = {2019}
+}
+@inproceedings{Boldi2019a,
+abstract = {Modern software development is increasingly dependent on components, libraries and frameworks coming from third party vendors or open-source suppliers and made available through a number of platforms (or 'forges'). This way of writing software puts an emphasis on reuse and on composition, commoditizing the services which modern applications require. On the other hand, bugs and vulnerabilities in a single library living in one such ecosystem can affect, directly or by transitivity, a huge number of other libraries and applications. Currently, only product-level information on library dependencies is used to contain this kind of danger, but this knowledge often reveals itself too imprecise to lead to effective (and possibly automated) handling policies. We will discuss how fine-grained function-level dependencies can greatly improve reliability and reduce the impact of vulnerabilities on the whole software ecosystem.},
+author = {Boldi, Paolo},
+booktitle = {Proceedings - 2019 IEEE 1st International Conference on Cognitive Machine Intelligence, CogMI 2019},
+doi = {10.1109/CogMI48466.2019.00032},
+isbn = {9781728167374},
+keywords = {Software-reuse-security-breaches-network-analysis},
+title = {{How network analysis can improve the reliability of modern software ecosystems}},
+year = {2019}
+}
+@inproceedings{Decan2018,
+abstract = {Security vulnerabilities are among the most pressing problems in open source software package libraries. It may take a long time to discover and fix vulnerabilities in packages. In addition, vulnerabilities may propagate to dependent packages, making them vulnerable too. This paper presents an empirical study of nearly 400 security reports over a 6-year period in the npm dependency network containing over 610k JavaScript packages. Taking into account the severity of vulnerabilities, we analyse how and when these vulnerabilities are discovered and fixed, and to which extent they affect other packages in the packaging ecosystem in presence of dependency constraints. We report our findings and provide guidelines for package maintainers and tool developers to improve the process of dealing with security issues.},
+author = {Decan, Alexandre and Mens, Tom and Constantinou, Eleni},
+booktitle = {Proceedings - International Conference on Software Engineering},
+doi = {10.1145/3196398.3196401},
+isbn = {9781450357166},
+issn = {02705257},
+keywords = {dependency network,security vulnerability,semantic versioning,software ecosystem,software repository mining},
+title = {{On the impact of security vulnerabilities in the npm package dependency network}},
+year = {2018}
+}
+@article{Zheng2008,
+abstract = {Software systems represent one of the most complex man-made artifacts. Understanding the structure of software systems can provide useful insights into software engineering efforts and can potentially help the development of complex system models applicable to other domains. In this paper, we analyze one of the most popular open-source Linux meta packages/distributions called the Gentoo Linux. In our analysis, we model software packages as nodes and dependencies among them as edges. Our empirical results show that the resulting Gentoo network cannot be easily explained by existing complex network models. This in turn motivates our research in developing two new network growth models in which a new node is connected to an old node with the probability that depends not only on the degree but also on the "age" of the old node. Through computational and empirical studies, we demonstrate that our models have better explanatory power than the existing ones. In an effort to further explore the properties of these new models, we also present some related analytical results. {\textcopyright} 2008 Elsevier B.V. All rights reserved.},
+author = {Zheng, Xiaolong and Zeng, Daniel and Li, Huiqian and Wang, Feiyue},
+doi = {10.1016/j.physa.2008.06.050},
+issn = {03784371},
+journal = {Physica A: Statistical Mechanics and its Applications},
+keywords = {Complex networks,Degree distribution,Open-source software systems},
+title = {{Analyzing open-source software systems as complex networks}},
+year = {2008}
+}
+@article{Bommarito2019,
+abstract = {In this research, we provide a comprehensive empirical summary of the Python Package Repository, PyPI, including both package metadata and source code covering 178,592 packages, 1,745,744 releases, 76,997 contributors, and 156,816,750 import statements. We provide counts and trends for packages, releases, dependencies, category classifications, licenses, and package imports, as well as authors, maintainers, and organizations. As one of the largest and oldest software repositories as of publication, PyPI provides insight not just into the Python ecosystem today, but also trends in software development and licensing more broadly over time. Within PyPI, we find that the growth of the repository has been robust under all measures, with a compound annual growth rate of 47{\%} for active packages, 39{\%} for new authors, and 61{\%} for new import statements over the last 15 years. As with many similar social systems, we find a number of highly right-skewed distributions, including the distribution of releases per package, packages and releases per author, imports per package, and size per package and release. However, we also find that most packages are contributed by single individuals, not multiple individuals or organizations. The data, methods, and calculations herein provide an anchor for public discourse on PyPI and serve as a foundation for future research on the Python software ecosystem.},
+archivePrefix = {arXiv},
+arxivId = {1907.11073},
+author = {Bommarito, Ethan and Bommarito, Michael James},
+doi = {10.2139/ssrn.3426281},
+eprint = {1907.11073},
+journal = {SSRN Electronic Journal},
+title = {{An Empirical Analysis of the Python Package Index (PyPI)}},
+year = {2019}
+}
