@@ -1,4 +1,4 @@
-from olivia.lib.TransientSequence import TransientSequence
+from olivia.lib.transientsequence import TransientSequence
 
 
 def test_create_simple():
