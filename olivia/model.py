@@ -11,7 +11,9 @@ class OliviaNetwork:
     """
 
     def __init__(self, file=None):
-        """ Creates and initializes an OliviaNetwork object.
+        """
+        Creates and initializes an OliviaNetwork object.
+
         Parameters
         ----------
         file: file or string
@@ -23,7 +25,9 @@ class OliviaNetwork:
             self.load(file)
 
     def load(self, file):
-        """ Loads an OliviaNetwork model from file
+        """
+        Loads an OliviaNetwork model from file
+
         Parameters
         ----------
         file: file or string
@@ -37,7 +41,9 @@ class OliviaNetwork:
         self._network = nx.read_gpickle(file)
 
     def save(self, file):
-        """ Saves an OliviaNetwork model to file
+        """
+        Saves an OliviaNetwork model to file
+
         Parameters
         ----------
         file: file or string
@@ -52,16 +58,12 @@ class OliviaNetwork:
 
     @property
     def network(self):
-        """
-
-        Returns
-        -------
-            network: The model's underlying DAG graph
-        """
+        """ Returns The model's underlying DAG graph"""
         return self._network
 
     def build_model(self, source):
-        """ Builds the model from specified source.
+        """
+        Builds the model from specified source.
 
         Parameters
         ----------

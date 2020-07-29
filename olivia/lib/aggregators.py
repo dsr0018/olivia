@@ -39,7 +39,8 @@ class AscendentAggregator(ABC):
     """
 
     def __init__(self, G, save_memory=False, compression_threshold=1000, mapping=None):
-        """Creates and inits an AscendentAggregator.
+        """
+        Creates and inits an AscendentAggregator.
     
         Parameters
         ----------
@@ -66,8 +67,11 @@ class AscendentAggregator(ABC):
         self._dag_result = None
 
     def _ascendent_aggregation(self):
-        """Computes descendant sets in reversed topological order and stores the result of the aggregation
-        function in _deg_result
+        """
+        Computes the aggregation function over the network.
+
+        Computes descendant sets in reversed topological order and stores the result of the aggregation
+        function in _dag_result
 
         Returns
         -------
@@ -86,7 +90,8 @@ class AscendentAggregator(ABC):
 
     @abstractmethod
     def _aggregation(self, n, descendants):
-        """Returns the value of the aggregation function.
+        """
+        Returns the value of the aggregation function.
 
         Parameters
         ----------
@@ -103,7 +108,8 @@ class AscendentAggregator(ABC):
         pass
 
     def _setup(self):
-        """Inits internal structures for computation.
+        """
+        Inits internal structures for computation.
 
         Returns
         -------
@@ -128,8 +134,8 @@ class AscendentAggregator(ABC):
                                               expiry_array=expiry)
 
     def compute(self):
-        """ Computes the ascendent aggregation metric defined by the aggregation function
-        according to instance parameters.
+        """
+        Computes the ascendent aggregation metric defined by the aggregation function.
 
         Returns
         -------

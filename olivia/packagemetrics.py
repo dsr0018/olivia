@@ -4,12 +4,15 @@ import numpy as np
 
 class Reach(AscendentAggregator):
     """
-    Olivia Reach Metric. REACH(n) is the number of transitive descendants for a package 'n', i.e. the number of
+    Olivia Reach Metric.
+
+    REACH(n) is the number of transitive descendants for a package 'n', i.e. the number of
     potentially affected packages by a defect in 'n'.
     """
 
     def __init__(self, olivia_model, **kwargs):
-        """ Creates a Reach metric object
+        """
+        Creates a Reach metric object
 
         Parameters
         ----------
@@ -39,12 +42,15 @@ class Reach(AscendentAggregator):
 
 class Impact(AscendentAggregator):
     """
-    Olivia Impact Metric. IMPACT(n) is the number of dependencies induced by a package 'n', or the size of the edge set
+    Olivia Impact Metric.
+
+    IMPACT(n) is the number of dependencies induced by a package 'n', or the size of the edge set
     of the subgraph induced by transitive descendants of n. It is the amount of dependencies that would be potentially
     compromised in the network by a defect in 'n'.
     """
     def __init__(self, olivia_model, **kwargs):
-        """ Creates an Impact metric object
+        """
+        Creates an Impact metric object
 
         Parameters
         ----------
@@ -65,7 +71,8 @@ class Impact(AscendentAggregator):
         return self._out[descendants].sum() + self._out[n]
 
     def compute(self):
-        """ Computes the Impact metric for each package in the network.
+        """
+        Computes the Impact metric for each package in the network.
 
         Returns
         -------
@@ -76,11 +83,14 @@ class Impact(AscendentAggregator):
 
 class Surface(DescendentAggregator):
     """
-    Olivia Surface Metric. SURFACE(n) is the number of transitive ascendants of a package 'n', i.e the number
+    Olivia Surface Metric.
+
+    SURFACE(n) is the number of transitive ascendants of a package 'n', i.e the number
     or the number of packets in which a defect would potentially cause the compromise of 'n'.
     """
     def __init__(self, olivia_model, **kwargs):
-        """ Creates an Impact metric object
+        """
+        Creates an Impact metric object
 
         Parameters
         ----------
@@ -113,7 +123,8 @@ class MetricStats:
     A helper class to store and manipulate Olivia metrics.
     """
     def __init__(self, results_dict, normalize_factor=1):
-        """ Creates and initializes a MetricStats object
+        """
+        Creates and initializes a MetricStats object
 
         Parameters
         ----------
@@ -128,7 +139,8 @@ class MetricStats:
         self._build_index()
 
     def __getitem__(self, index):
-        """Metric value for package 'index'
+        """
+        Metric value for package 'index'
 
         Parameters
         ----------
@@ -149,7 +161,8 @@ class MetricStats:
         self._sorted_keys = self._keys[sorted_indexes]
 
     def top(self, n=1):
-        """ Returns the top 'n' elements according to its metric value
+        """
+        Returns the top 'n' elements according to its metric value
 
         Parameters
         ----------
@@ -164,7 +177,8 @@ class MetricStats:
         return [(k, self._results[k]) for k in self._sorted_keys[:n]]
 
     def bottom(self, n=1):
-        """ Returns the bottom 'n' elements according to its metric value
+        """
+        Returns the bottom 'n' elements according to its metric value
 
         Parameters
         ----------

@@ -43,7 +43,8 @@ class TransientSequence(Sequence):
     def __init__(self, size, class_type=object, compressor=DEFAULT_COMPRESSOR.__func__,
                  decompressor=DEFAULT_DECOMPRESSOR.__func__,
                  compression_threshold=1000, expiry_array=None):
-        """Creates and initializes a TransientSequence.
+        """
+        Creates and initializes a TransientSequence.
 
         Parameters
         ----------
@@ -71,7 +72,8 @@ class TransientSequence(Sequence):
             self._expiry_original = expiry_array.copy()
 
     def __setitem__(self, index, value):
-        """Assigns value to position 'index'.
+        """
+        Assigns value to position 'index'.
 
         Parameters
         ----------
@@ -105,7 +107,8 @@ class TransientSequence(Sequence):
             self._expiry[index] = self._expiry_original[index]
 
     def __getitem__(self, index):
-        """Returns the object at position 'index'.
+        """
+        Returns the object at position 'index'.
 
         Parameters
         ----------
@@ -135,7 +138,8 @@ class TransientSequence(Sequence):
         return out
 
     def __len__(self):
-        """Returns the length of the TransientSequence.
+        """
+        Returns the length of the TransientSequence.
 
         Returns
         -------
