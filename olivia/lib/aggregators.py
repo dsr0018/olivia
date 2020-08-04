@@ -7,6 +7,7 @@ from olivia.lib.transientsequence import TransientSequence
 
 
 class AscendentAggregator(ABC):
+
     """
     Base class for the network-wide computation of ascendent aggregation metrics.
 
@@ -161,6 +162,7 @@ class DescendentAggregator(AscendentAggregator, ABC):
     """
 
     def __init__(self, *args, **kwargs):
+        """Creates and inits an DescendentAggregator."""
         super(DescendentAggregator, self).__init__(*args, **kwargs)
         self._topological_order = reversed(self._topological_order)
 

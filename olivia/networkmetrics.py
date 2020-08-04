@@ -1,7 +1,5 @@
 from olivia.packagemetrics import Reach
 
-import numpy as np
-
 
 def failure_vulnerability(olivia_model, metric=Reach, normalize=False):
     ms = olivia_model.get_metric(metric)

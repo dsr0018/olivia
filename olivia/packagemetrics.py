@@ -5,6 +5,7 @@ import numpy as np
 
 
 class Reach(AscendentAggregator):
+
     """
     Olivia Reach Metric.
 
@@ -33,7 +34,7 @@ class Reach(AscendentAggregator):
         return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
 
     def compute(self):
-        """ Computes the Reach metric for each package in the network.
+        """Computes the Reach metric for each package in the network.
 
         Returns
         -------
@@ -44,6 +45,7 @@ class Reach(AscendentAggregator):
 
 
 class Impact(AscendentAggregator):
+
     """
     Olivia Impact Metric.
 
@@ -87,6 +89,7 @@ class Impact(AscendentAggregator):
 
 
 class Surface(DescendentAggregator):
+
     """
     Olivia Surface Metric.
 
@@ -127,6 +130,7 @@ class Surface(DescendentAggregator):
 
 
 class MetricStats:
+
     """
     A helper class to store and manipulate Olivia metrics.
     """
@@ -225,30 +229,35 @@ class MetricStats:
         self._build_index()
 
     def __add__(self, other):
+        """Adds metric values element-wise or to a numeric constant"""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] + other for e in self.keys})
         else:
             return MetricStats({e: self[e] + other[e] for e in self.keys})
 
     def __sub__(self, other):
+        """Subtract metric values element-wise or a numeric constant"""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] - other for e in self.keys})
         else:
             return MetricStats({e: self[e] - other[e] for e in self.keys})
 
     def __mul__(self, other):
+        """Multiplies metric values element-wise or to a numeric constant"""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] * other for e in self.keys})
         else:
             return MetricStats({e: self[e] * other[e] for e in self.keys})
 
     def __truediv__(self, other):
+        """Divides metric values element-wise or with a numeric constant"""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] / other for e in self.keys})
         else:
             return MetricStats({e: self[e] / other[e] for e in self.keys})
 
     def __pow__(self, other):
+        """Power metric values element-wise  or to a numeric constant"""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] ** other for e in self.keys})
         else:

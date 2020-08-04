@@ -72,12 +72,12 @@ class OliviaNetwork:
 
     @property
     def network(self):
-        """ Returns the package network"""
+        """Returns the package network"""
         return self._network
 
     @property
     def dag(self):
-        """ Returns the model's underlying DAG graph"""
+        """Returns the model's underlying DAG graph"""
         return self._dag
 
     def get_metric(self, func):

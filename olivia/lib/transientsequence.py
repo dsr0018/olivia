@@ -4,6 +4,7 @@ from collections.abc import Sequence
 
 
 class TransientSequence(Sequence):
+
     """
     A fixed size Sequence type for managing large in-memory structures.
 
