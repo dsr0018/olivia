@@ -1,3 +1,5 @@
+import numbers
+
 from olivia.lib.aggregators import AscendentAggregator, DescendentAggregator
 import numpy as np
 
@@ -22,10 +24,10 @@ class Reach(AscendentAggregator):
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
         """
-        super().__init__(olivia_model.network,
-                         mapping=olivia_model.network.graph['mapping'],
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph['mapping'],
                          **kwargs)
-        self._scc_sizes = np.array([len(olivia_model.network.nodes[x]['members']) for x in olivia_model.network])
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x]['members']) for x in olivia_model.dag])
 
     def _aggregation(self, n, descendants):
         return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
@@ -37,6 +39,7 @@ class Reach(AscendentAggregator):
         -------
             ms: A ~MetricStats object with the results of the computation.
         """
+        print("Computing Reach")
         return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
 
 
@@ -48,6 +51,7 @@ class Impact(AscendentAggregator):
     of the subgraph induced by transitive descendants of n. It is the amount of dependencies that would be potentially
     compromised in the network by a defect in 'n'.
     """
+
     def __init__(self, olivia_model, **kwargs):
         """
         Creates an Impact metric object
@@ -60,12 +64,12 @@ class Impact(AscendentAggregator):
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
         """
-        super().__init__(olivia_model.network,
-                         mapping=olivia_model.network.graph['mapping'],
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph['mapping'],
                          **kwargs)
-        odegree = olivia_model.network.out_degree(weight='weight')
-        intra_edges = np.array([olivia_model.network.nodes[n]['intra_edges'] for n in olivia_model.network])
-        self._out = np.array([odegree[n] for n in olivia_model.network]) + intra_edges
+        odegree = olivia_model.dag.out_degree(weight='weight')
+        intra_edges = np.array([olivia_model.dag.nodes[n]['intra_edges'] for n in olivia_model.dag])
+        self._out = np.array([odegree[n] for n in olivia_model.dag]) + intra_edges
 
     def _aggregation(self, n, descendants):
         return self._out[descendants].sum() + self._out[n]
@@ -78,6 +82,7 @@ class Impact(AscendentAggregator):
         -------
             ms: A ~MetricStats object with the results of the computation.
         """
+        print("Computing Impact")
         return MetricStats(super().compute(), normalize_factor=self._out.sum())
 
 
@@ -88,6 +93,7 @@ class Surface(DescendentAggregator):
     SURFACE(n) is the number of transitive ascendants of a package 'n', i.e the number
     or the number of packets in which a defect would potentially cause the compromise of 'n'.
     """
+
     def __init__(self, olivia_model, **kwargs):
         """
         Creates an Impact metric object
@@ -100,21 +106,23 @@ class Surface(DescendentAggregator):
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
         """
-        super().__init__(olivia_model.network,
-                         mapping=olivia_model.network.graph['mapping'],
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph['mapping'],
                          **kwargs)
-        self._scc_sizes = np.array([len(olivia_model.network.nodes[x]['members']) for x in olivia_model.network])
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x]['members']) for x in olivia_model.dag])
 
     def _aggregation(self, n, descendants):
         return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
 
     def compute(self):
-        """ Computes the Surface metric for each package in the network.
+        """
+        Computes the Surface metric for each package in the network.
 
         Returns
         -------
             ms: A ~MetricStats object with the results of the computation.
         """
+        print("Computing Surface")
         return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
 
 
@@ -122,6 +130,7 @@ class MetricStats:
     """
     A helper class to store and manipulate Olivia metrics.
     """
+
     def __init__(self, results_dict, normalize_factor=1):
         """
         Creates and initializes a MetricStats object
@@ -209,8 +218,38 @@ class MetricStats:
         return self._normalize_factor
 
     def normalize(self):
-        if self._normalized:
+        if self._normalized or self._normalize_factor == 1:
             return
         for k in self._results:
             self._results[k] = self._results[k] / self._normalize_factor
         self._build_index()
+
+    def __add__(self, other):
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] + other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] + other[e] for e in self.keys})
+
+    def __sub__(self, other):
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] - other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] - other[e] for e in self.keys})
+
+    def __mul__(self, other):
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] * other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] * other[e] for e in self.keys})
+
+    def __truediv__(self, other):
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] / other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] / other[e] for e in self.keys})
+
+    def __pow__(self, other):
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] ** other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] ** other[e] for e in self.keys})

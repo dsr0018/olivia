@@ -38,7 +38,7 @@ class AscendentAggregator(ABC):
     Stores descendant sets in instances of ~olivia.lib.transientsequence.TransientSequence
     """
 
-    def __init__(self, G, save_memory=False, compression_threshold=1000, mapping=None):
+    def __init__(self, G, save_memory=False, compression_threshold=np.inf, mapping=None):
         """
         Creates and inits an AscendentAggregator.
     
@@ -79,7 +79,7 @@ class AscendentAggregator(ABC):
         """
         for n in self._topological_order:
             if not n % 1000:
-                print(n // 1000, 'K     ', end='\r')
+                print('     Processing node: '+str(n // 1000)+'K      ', end='\r', flush=True)
             tempset = intbitset()
             for m in self._G[n]:
                 if m not in tempset:
@@ -87,6 +87,7 @@ class AscendentAggregator(ABC):
                     tempset.add(m)
             self._descendants[n] = tempset
             self._dag_result[n] = self._aggregation(n, tempset)
+        print()
 
     @abstractmethod
     def _aggregation(self, n, descendants):

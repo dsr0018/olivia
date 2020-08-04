@@ -1,4 +1,6 @@
 import networkx as nx
+import gzip
+import pickle
 
 
 class OliviaNetwork:
@@ -20,6 +22,8 @@ class OliviaNetwork:
             File or file name to read an OliviaNetwork model from.
         """
         if file is None:
+            self._dag = None
+            self._metrics_cache = dict()  # In-model metrics cache
             self._network = None
         else:
             self.load(file)
@@ -38,7 +42,12 @@ class OliviaNetwork:
         -------
         None
         """
-        self._network = nx.read_gpickle(file)
+        with gzip.GzipFile(file, 'rb') as f:
+            load_dict = pickle.load(f)
+
+        self._network = nx.from_dict_of_lists(load_dict['network'])
+        self._dag = load_dict['dag']
+        self._metrics_cache = load_dict['cache']
 
     def save(self, file):
         """
@@ -54,12 +63,29 @@ class OliviaNetwork:
         -------
         None
         """
-        nx.write_gpickle(self._network, file)
+        save_dict = {'network': nx.to_dict_of_lists(self._network),
+                     'dag': self._dag,
+                     'cache': self._metrics_cache}
+
+        with gzip.GzipFile(file, 'wb') as f:
+            pickle.dump(save_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
 
     @property
     def network(self):
-        """ Returns The model's underlying DAG graph"""
+        """ Returns the package network"""
         return self._network
+
+    @property
+    def dag(self):
+        """ Returns the model's underlying DAG graph"""
+        return self._dag
+
+    def get_metric(self, func):
+        if func.__name__ in self._metrics_cache:
+            print(f'{func.__name__} retrieved from metrics cache')
+        else:
+            self._metrics_cache[func.__name__] = func(self).compute()
+        return self._metrics_cache[func.__name__]
 
     def build_model(self, source):
         """
@@ -70,21 +96,22 @@ class OliviaNetwork:
         source: File or file name or Networkx DiGraph
             Source to build the model from. Files should be in adjacency list format.
             Filenames ending in .gz or .bz2 will be uncompressed.
-            If a DiGraph is provided, node and edge data will be lost, as it is not included into the model.
 
         Returns
         -------
         None
         """
         if isinstance(source, nx.DiGraph):
-            G = source
+            self._network = source
         else:
-            G = nx.read_adjlist(source, create_using=nx.DiGraph())
-        print('Finding strongly connected components (SCCs)...')
-        scc = nx.strongly_connected_components(G)
-        print('Building condensation network...')
-        GC = nx.condensation(G, list(scc))
-        print('Adding structural meta-data...')
+            print("Reading dependencies file...")
+            self._network = nx.read_adjlist(source, create_using=nx.DiGraph())
+        print("Building Olivia Model")
+        print('     Finding strongly connected components (SCCs)...')
+        scc = nx.strongly_connected_components(self._network)
+        print('     Building condensation network...')
+        GC = nx.condensation(self._network, list(scc))
+        print('     Adding structural meta-data...')
 
         # Model includes weighted edges to represent
         # ingoing/outgoing dependencies to/from SCC
@@ -93,8 +120,8 @@ class OliviaNetwork:
         for n in GC.nodes:
             GC.nodes[n]['intra_edges'] = 0
 
-        for n in G:
-            for e in G.in_edges(n):
+        for n in self._network:
+            for e in self._network.in_edges(n):
                 u, v = e
                 map_u = GC.graph['mapping'][u]
                 map_v = GC.graph['mapping'][v]
@@ -104,5 +131,5 @@ class OliviaNetwork:
                 else:
                     # Weight for edge to/from SCC
                     GC.edges[(map_u, map_v)]['weight'] += 1
-        self._network = GC
-        print("Done")
+        self._dag = GC
+        print("     Done")

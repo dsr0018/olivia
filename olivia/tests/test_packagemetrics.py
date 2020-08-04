@@ -85,3 +85,13 @@ def test_metric_stats():
     ms.normalize()
     assert np.array_equal(ms.values, np.array([1, 2, 3]))
 
+
+def test_metric_ops():
+    ms1 = MetricStats({'a': 2, 'b': 4, 'c': 6})
+    ms2 = MetricStats({'a': 1, 'b': 2, 'c': 3})
+
+    assert (ms1 * 2 - ms2 - 1).results_dict == {'a': 2, 'b': 5, 'c': 8}
+    assert (ms1 ** 2 / ms2).results_dict == {'a': 4, 'b': 8, 'c': 12}
+    assert ((ms1 + ms2) ** 2).results_dict == {'a': 9, 'b': 36, 'c': 81}
+    assert (ms1 ** ms2 + 1).results_dict == {'a': 3, 'b': 17, 'c': 217}
+    assert (ms2 / 2).results_dict == {'a': 0.5, 'b': 1, 'c': 1.5}
