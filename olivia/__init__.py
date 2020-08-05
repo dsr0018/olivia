@@ -1,7 +1,6 @@
 """
-Olivia
-======
-Open-source Library Indexes Vulnerability Identification and Analysis.
+Olivia: Open-source Library Indexes Vulnerability Identification and Analysis.
+
 Includes tools for the analysis of package dependency networks vulnerability to failures and attacks.
 
 model.py: Olivia network model. OliviaNetwork includes methods for building and manipulating models.

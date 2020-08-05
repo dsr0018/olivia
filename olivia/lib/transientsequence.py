@@ -1,3 +1,5 @@
+"""TransientSequence class."""
+
 import pickle
 import zlib
 from collections.abc import Sequence
@@ -31,21 +33,22 @@ class TransientSequence(Sequence):
         Upper size (len) limit to keep objects uncompressed.
     expiry_array: sequence or None, optional
         Number of accesses per object before deletion. Reassigning reverts the counter to its original value.
+
     """
 
     @staticmethod
-    def DEFAULT_COMPRESSOR(value):
+    def _DEFAULT_COMPRESSOR(value):
         return zlib.compress(pickle.dumps(value))
 
     @staticmethod
-    def DEFAULT_DECOMPRESSOR(value):
+    def _DEFAULT_DECOMPRESSOR(value):
         return pickle.loads(zlib.decompress(value))
 
-    def __init__(self, size, class_type=object, compressor=DEFAULT_COMPRESSOR.__func__,
-                 decompressor=DEFAULT_DECOMPRESSOR.__func__,
+    def __init__(self, size, class_type=object, compressor=_DEFAULT_COMPRESSOR.__func__,
+                 decompressor=_DEFAULT_DECOMPRESSOR.__func__,
                  compression_threshold=1000, expiry_array=None):
         """
-        Creates and initializes a TransientSequence.
+        Create and initialize a TransientSequence.
 
         Parameters
         ----------
@@ -61,6 +64,7 @@ class TransientSequence(Sequence):
             Upper size (len) limit to keep objects uncompressed.
         expiry_array: sequence or None, optional
             Number of accesses per object before deletion. Reassigning reverts the counter to its original value.
+
         """
         self._data = [None] * size
         self._compressed = [False] * size
@@ -74,7 +78,7 @@ class TransientSequence(Sequence):
 
     def __setitem__(self, index, value):
         """
-        Assigns value to position 'index'.
+        Assign value to position 'index'.
 
         Parameters
         ----------
@@ -90,6 +94,7 @@ class TransientSequence(Sequence):
         Notes
         -----
         Transparently compresses the object if length > compression_threshold.
+
         """
         if value is None:
             self._data[index] = None
@@ -109,7 +114,7 @@ class TransientSequence(Sequence):
 
     def __getitem__(self, index):
         """
-        Returns the object at position 'index'.
+        Return the object at position 'index'.
 
         Parameters
         ----------
@@ -125,6 +130,7 @@ class TransientSequence(Sequence):
         -----
         Transparently decompresses the object if needed and deletes the reference if compression_threshold
         is exceeded.
+
         """
         if self._data[index] is None:
             out = self._class_type()
@@ -140,11 +146,12 @@ class TransientSequence(Sequence):
 
     def __len__(self):
         """
-        Returns the length of the TransientSequence.
+        Return the length of the TransientSequence.
 
         Returns
         -------
         length : int
             Number of objects in the TransientSequence (length)
+
         """
         return len(self._data)

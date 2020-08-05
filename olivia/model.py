@@ -1,25 +1,33 @@
+"""
+Olivia Model for studying the vulnerability of package dependency networks.
+
+Olivia stands for 'Open-source Library Indexes Vulnerability Identification and Analysis'.
+Includes tools for the analysis of package dependency networks vulnerability to failures and attacks.
+"""
+
 import networkx as nx
 import gzip
 import pickle
 
 
 class OliviaNetwork:
-    """
-    Model for studying the vulnerability of package dependency networks. Uses a directed acyclic graph to represent
-    the fundamental structure of the network.
 
-    Olivia stands for 'Open-source Library Indexes Vulnerability Identification and Analysis'.
-    Includes tools for the analysis of package dependency networks vulnerability to failures and attacks.
+    """
+    Model for studying the vulnerability of package dependency networks.
+
+    Uses a directed acyclic graph to represent the fundamental structure of the network. Also acts as a gateway for
+    querying cached metric values for the packages in the network.
     """
 
     def __init__(self, file=None):
         """
-        Creates and initializes an OliviaNetwork object.
+        Create and initializes an OliviaNetwork object.
 
         Parameters
         ----------
         file: file or string
             File or file name to read an OliviaNetwork model from.
+
         """
         if file is None:
             self._dag = None
@@ -30,17 +38,17 @@ class OliviaNetwork:
 
     def load(self, file):
         """
-        Loads an OliviaNetwork model from file
+        Load an OliviaNetwork model from file.
 
         Parameters
         ----------
         file: file or string
             File or file name to read an OliviaNetwork model from.
-            Filenames ending in .gz or .bz2 will be uncompressed.
 
         Returns
         -------
         None
+
         """
         with gzip.GzipFile(file, 'rb') as f:
             load_dict = pickle.load(f)
@@ -51,17 +59,17 @@ class OliviaNetwork:
 
     def save(self, file):
         """
-        Saves an OliviaNetwork model to file
+        Save an OliviaNetwork model to file.
 
         Parameters
         ----------
         file: file or string
             File or file name to write an OliviaNetwork model to.
-            Filenames ending in .gz or .bz2 will be compressed.
 
         Returns
         -------
         None
+
         """
         save_dict = {'network': nx.to_dict_of_lists(self._network),
                      'dag': self._dag,
@@ -72,24 +80,41 @@ class OliviaNetwork:
 
     @property
     def network(self):
-        """Returns the package network"""
+        """Return the package network."""
         return self._network
 
     @property
     def dag(self):
-        """Returns the model's underlying DAG graph"""
+        """Return the model's underlying DAG graph."""
         return self._dag
 
-    def get_metric(self, func):
-        if func.__name__ in self._metrics_cache:
-            print(f'{func.__name__} retrieved from metrics cache')
+    def get_metric(self, metric_class):
+        """
+        Compute or get form the internal cache metric values for the packages in the network.
+
+        If metric values are not available, the are computed instantiating metric_class and calling compute(),and
+        are subsequently stored for future use.
+
+        Parameters
+        ----------
+        metric_class: class
+            Class implementing compute()
+
+        Returns
+        -------
+        ms: object
+            An object containing the computed metric values. For Olivia metrics this is always a MetricStats instance.
+
+        """
+        if metric_class.__name__ in self._metrics_cache:
+            print(f'{metric_class.__name__} retrieved from metrics cache')
         else:
-            self._metrics_cache[func.__name__] = func(self).compute()
-        return self._metrics_cache[func.__name__]
+            self._metrics_cache[metric_class.__name__] = metric_class(self).compute()
+        return self._metrics_cache[metric_class.__name__]
 
     def build_model(self, source):
         """
-        Builds the model from specified source.
+        Build the model from specified source.
 
         Parameters
         ----------
@@ -100,6 +125,7 @@ class OliviaNetwork:
         Returns
         -------
         None
+
         """
         if isinstance(source, nx.DiGraph):
             self._network = source

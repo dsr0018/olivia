@@ -1,3 +1,5 @@
+"""Aggregator base classes for computing metrics on Directed Acyclic Graphs."""
+
 from abc import abstractmethod, ABC
 import numpy as np
 import networkx as nx
@@ -15,9 +17,12 @@ class AscendentAggregator(ABC):
     transitive descendants. The aggregation function must be implemented in the subclasses.
 
     The reversed topological order of the network is used to compute descendant sets in a relatively efficient manner,
-    using a modified version of the Goralcikova-Koubek algorithm.
+    using a modified version of the Goralcikova-Koubek algorithm [1].
 
     Thus input graph must be acyclic and it is expected to be indexed by reversed topological order.
+
+    [1] Goralčíková, Alla, and Václav Koubek. "A reduct-and-closure algorithm for graphs." International Symposium
+    on Mathematical Foundations of Computer Science. Springer, Berlin, Heidelberg, 1979.
 
     Parameters
     ----------
@@ -37,11 +42,12 @@ class AscendentAggregator(ABC):
     Notes
     -----
     Stores descendant sets in instances of ~olivia.lib.transientsequence.TransientSequence
+
     """
 
     def __init__(self, G, save_memory=False, compression_threshold=np.inf, mapping=None):
         """
-        Creates and inits an AscendentAggregator.
+        Create and inits an AscendentAggregator.
     
         Parameters
         ----------
@@ -58,6 +64,7 @@ class AscendentAggregator(ABC):
             If a mapping is provided, computation returns a dictionary with values for each key
             according to value indexes.
             If not, a raw array indexed by node is returned.
+
         """
         self._G = G
         self._topological_order = range(len(G))
@@ -69,7 +76,7 @@ class AscendentAggregator(ABC):
 
     def _ascendent_aggregation(self):
         """
-        Computes the aggregation function over the network.
+        Compute the aggregation function over the network.
 
         Computes descendant sets in reversed topological order and stores the result of the aggregation
         function in _dag_result
@@ -77,6 +84,7 @@ class AscendentAggregator(ABC):
         Returns
         -------
         None
+
         """
         for n in self._topological_order:
             if not n % 1000:
@@ -93,7 +101,7 @@ class AscendentAggregator(ABC):
     @abstractmethod
     def _aggregation(self, n, descendants):
         """
-        Returns the value of the aggregation function.
+        Return the value of the aggregation function.
 
         Parameters
         ----------
@@ -106,16 +114,18 @@ class AscendentAggregator(ABC):
         -------
         value: int or object
             Value of the aggregation function for n and its descendants.
+
         """
         pass
 
     def _setup(self):
         """
-        Inits internal structures for computation.
+        Init internal structures for computation.
 
         Returns
         -------
         None
+
         """
 
         def intbitset_decompressor(v):
@@ -137,7 +147,7 @@ class AscendentAggregator(ABC):
 
     def compute(self):
         """
-        Computes the ascendent aggregation metric defined by the aggregation function.
+        Compute the ascendent aggregation metric defined by the aggregation function.
 
         Returns
         -------
@@ -145,6 +155,7 @@ class AscendentAggregator(ABC):
             If a mapping is provided, computation returns a dictionary with values for each key
             according to value indexes.
             If not, a raw array indexed by node is returned.
+
         """
         self._setup()
         self._ascendent_aggregation()
@@ -155,6 +166,7 @@ class AscendentAggregator(ABC):
 
 
 class DescendentAggregator(AscendentAggregator, ABC):
+
     """
     Abstract subclass of DescendentAggregator for inverting the computing direction.
 
@@ -162,10 +174,21 @@ class DescendentAggregator(AscendentAggregator, ABC):
     """
 
     def __init__(self, *args, **kwargs):
-        """Creates and inits an DescendentAggregator."""
+        """Create and init an DescendentAggregator."""
         super(DescendentAggregator, self).__init__(*args, **kwargs)
         self._topological_order = reversed(self._topological_order)
 
     def compute(self):
+        """
+        Compute the descendent aggregation metric defined by the aggregation function.
+
+        Returns
+        -------
+        result: numpy.array or dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        """
         with nx.utils.contextmanagers.reversed(self._G):
             return super(DescendentAggregator, self).compute()

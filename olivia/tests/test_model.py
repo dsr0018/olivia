@@ -44,6 +44,7 @@ def test_simple_network():
     assert aux_get_intraedges(net) == [0, 0, 0, 0], 'Non null intra-edge counts'
     assert set(nx.path_graph(4, create_using=nx.DiGraph).in_edges()) == set(net.network.in_edges())
 
+
 def test_scc_network():
     assert set(net.dag.edges) == {(1, 0),
                                   (2, 0),
@@ -53,20 +54,21 @@ def test_scc_network():
                                   (6, 4),
                                   (6, 5)}, 'Edge set does not match'
     assert net.dag.graph['mapping'] == {'k': 0,
-                                            'j': 0,
-                                            'g': 1,
-                                            'h': 2,
-                                            'i': 2,
-                                            'f': 3,
-                                            'e': 4,
-                                            'c': 4,
-                                            'b': 4,
-                                            'd': 4,
-                                            'l': 5,
+                                        'j': 0,
+                                        'g': 1,
+                                        'h': 2,
+                                        'i': 2,
+                                        'f': 3,
+                                        'e': 4,
+                                        'c': 4,
+                                        'b': 4,
+                                        'd': 4,
+                                        'l': 5,
                                         'a': 6}, 'Wrong mapping'
     assert aux_get_weights(net) == [1, 2, 1, 2, 1, 1, 1], 'Weights do not match'
     assert aux_get_intraedges(net) == [2, 0, 2, 0, 4, 0, 0], 'Intra-edge counts do  not match'
     assert set(G.in_edges()) == set(net.network.in_edges())
+
 
 def test_io():
     net.save('test.olv')

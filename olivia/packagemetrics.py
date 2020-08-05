@@ -1,3 +1,5 @@
+"""Olivia package metrics for network vulnerability analysis."""
+
 import numbers
 
 from olivia.lib.aggregators import AscendentAggregator, DescendentAggregator
@@ -15,7 +17,7 @@ class Reach(AscendentAggregator):
 
     def __init__(self, olivia_model, **kwargs):
         """
-        Creates a Reach metric object
+        Create a Reach metric object.
 
         Parameters
         ----------
@@ -24,6 +26,7 @@ class Reach(AscendentAggregator):
         kwargs: **kwargs
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
+
         """
         super().__init__(olivia_model.dag,
                          mapping=olivia_model.dag.graph['mapping'],
@@ -34,11 +37,13 @@ class Reach(AscendentAggregator):
         return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
 
     def compute(self):
-        """Computes the Reach metric for each package in the network.
+        """
+        Compute the Reach metric for each package in the network.
 
         Returns
         -------
             ms: A ~MetricStats object with the results of the computation.
+
         """
         print("Computing Reach")
         return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
@@ -56,7 +61,7 @@ class Impact(AscendentAggregator):
 
     def __init__(self, olivia_model, **kwargs):
         """
-        Creates an Impact metric object
+        Create an Impact metric object.
 
         Parameters
         ----------
@@ -65,6 +70,7 @@ class Impact(AscendentAggregator):
         kwargs: **kwargs
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
+
         """
         super().__init__(olivia_model.dag,
                          mapping=olivia_model.dag.graph['mapping'],
@@ -78,11 +84,12 @@ class Impact(AscendentAggregator):
 
     def compute(self):
         """
-        Computes the Impact metric for each package in the network.
+        Compute the Impact metric for each package in the network.
 
         Returns
         -------
             ms: A ~MetricStats object with the results of the computation.
+
         """
         print("Computing Impact")
         return MetricStats(super().compute(), normalize_factor=self._out.sum())
@@ -99,7 +106,7 @@ class Surface(DescendentAggregator):
 
     def __init__(self, olivia_model, **kwargs):
         """
-        Creates an Impact metric object
+        Create an Impact metric object.
 
         Parameters
         ----------
@@ -108,6 +115,7 @@ class Surface(DescendentAggregator):
         kwargs: **kwargs
             Parameters for ~olivia.lib.aggregators.AscendentAggregator.
             Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.
+
         """
         super().__init__(olivia_model.dag,
                          mapping=olivia_model.dag.graph['mapping'],
@@ -119,25 +127,90 @@ class Surface(DescendentAggregator):
 
     def compute(self):
         """
-        Computes the Surface metric for each package in the network.
+        Compute the Surface metric for each package in the network.
 
         Returns
         -------
             ms: A ~MetricStats object with the results of the computation.
+
         """
         print("Computing Surface")
         return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
 
 
-class MetricStats:
+class DependenciesCount:
 
     """
-    A helper class to store and manipulate Olivia metrics.
+    Dependencies Count Metric.
+
+    Number of direct dependencies of a package.
     """
+
+    def __init__(self, olivia_model):
+        """
+        Create a DependenciesCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        """
+        self.net = olivia_model
+
+    def compute(self):
+        """
+        Compute the Dependencies Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        """
+        print("Computing Dependencies Count")
+        return MetricStats({package: self.net.network.in_degree(package) for package in self.net.network})
+
+
+class DependentsCount:
+
+    """
+    Dependents Count Metric.
+
+    Number of direct dependents of a package.
+    """
+
+    def __init__(self, olivia_model):
+        """
+        Create a DependentsCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        """
+        self.net = olivia_model
+
+    def compute(self):
+        """
+        Compute the Dependents Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        """
+        print("Computing Dependents Count")
+        return MetricStats({package: self.net.network.out_degree(package) for package in self.net.network})
+
+
+class MetricStats:
+
+    """A helper class to store and manipulate Olivia metrics."""
 
     def __init__(self, results_dict, normalize_factor=1):
         """
-        Creates and initializes a MetricStats object
+        Create and initializes a MetricStats object.
 
         Parameters
         ----------
@@ -145,6 +218,7 @@ class MetricStats:
             {node:value} dict with metric values.
         normalize_factor: float
             Factor to perform normalization
+
         """
         self._results = results_dict
         self._normalize_factor = normalize_factor
@@ -153,7 +227,7 @@ class MetricStats:
 
     def __getitem__(self, index):
         """
-        Metric value for package 'index'
+        Metric value for package 'index'.
 
         Parameters
         ----------
@@ -163,7 +237,8 @@ class MetricStats:
         Returns
         -------
         value: int
-            Metric value for package 'index'
+            Metric value for package 'index'.
+
         """
         return self._results[index]
 
@@ -175,7 +250,7 @@ class MetricStats:
 
     def top(self, n=1):
         """
-        Returns the top 'n' elements according to its metric value
+        Return the top 'n' elements according to its metric value.
 
         Parameters
         ----------
@@ -185,13 +260,14 @@ class MetricStats:
         Returns
         -------
         result: list of duples
-            List of top n (package, metric value) tuples
+            List of top n (package, metric value) tuples.
+
         """
         return [(k, self._results[k]) for k in self._sorted_keys[:n]]
 
     def bottom(self, n=1):
         """
-        Returns the bottom 'n' elements according to its metric value
+        Return the bottom 'n' elements according to its metric value.
 
         Parameters
         ----------
@@ -201,27 +277,33 @@ class MetricStats:
         Returns
         -------
         result: list of duples
-            List of bottom n (package, metric value) tuples
+            List of bottom n (package, metric value) tuples.
+
         """
         return [(k, self._results[k]) for k in self._sorted_keys[-n:]]
 
     @property
     def values(self):
+        """Return array with metric values."""
         return self._values
 
     @property
     def keys(self):
+        """Return package names."""
         return self._keys
 
     @property
     def results_dict(self):
+        """Return metric values in a package:value dictionary."""
         return self._results
 
     @property
     def normalize_factor(self):
+        """Return factor used for performing metric normalization."""
         return self._normalize_factor
 
     def normalize(self):
+        """Perform metric normalization."""
         if self._normalized or self._normalize_factor == 1:
             return
         for k in self._results:
@@ -229,35 +311,35 @@ class MetricStats:
         self._build_index()
 
     def __add__(self, other):
-        """Adds metric values element-wise or to a numeric constant"""
+        """Add metric values element-wise or to a numeric constant."""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] + other for e in self.keys})
         else:
             return MetricStats({e: self[e] + other[e] for e in self.keys})
 
     def __sub__(self, other):
-        """Subtract metric values element-wise or a numeric constant"""
+        """Subtract metric values element-wise or a numeric constant."""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] - other for e in self.keys})
         else:
             return MetricStats({e: self[e] - other[e] for e in self.keys})
 
     def __mul__(self, other):
-        """Multiplies metric values element-wise or to a numeric constant"""
+        """Multiply metric values element-wise or to a numeric constant."""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] * other for e in self.keys})
         else:
             return MetricStats({e: self[e] * other[e] for e in self.keys})
 
     def __truediv__(self, other):
-        """Divides metric values element-wise or with a numeric constant"""
+        """Divide metric values element-wise or with a numeric constant."""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] / other for e in self.keys})
         else:
             return MetricStats({e: self[e] / other[e] for e in self.keys})
 
     def __pow__(self, other):
-        """Power metric values element-wise  or to a numeric constant"""
+        """Power metric values element-wise  or to a numeric constant."""
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] ** other for e in self.keys})
         else:

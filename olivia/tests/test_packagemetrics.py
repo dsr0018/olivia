@@ -2,7 +2,7 @@ import networkx as nx
 import numpy as np
 
 from olivia.model import OliviaNetwork
-from olivia.packagemetrics import Reach, Surface, Impact, MetricStats
+from olivia.packagemetrics import Reach, Surface, Impact, MetricStats, DependenciesCount, DependentsCount
 
 G = nx.DiGraph()
 G.add_edges_from((['a', 'b'],
@@ -72,6 +72,38 @@ def test_impact():
                               'i': 6,
                               'j': 2,
                               'k': 2,
+                              'l': 0}, 'Result does not match'
+
+
+def test_dependenciescount():
+    m = DependenciesCount(net).compute()
+    assert m.results_dict == {'a': 0,
+                              'b': 2,
+                              'c': 1,
+                              'd': 1,
+                              'e': 1,
+                              'f': 1,
+                              'g': 1,
+                              'j': 3,
+                              'i': 2,
+                              'h': 2,
+                              'k': 2,
+                              'l': 1}, 'Result does not match'
+
+
+def test_dependentscount():
+    m = DependentsCount(net).compute()
+    assert m.results_dict == {'a': 2,
+                              'b': 1,
+                              'c': 1,
+                              'd': 2,
+                              'e': 1,
+                              'f': 3,
+                              'g': 1,
+                              'j': 1,
+                              'i': 2,
+                              'h': 2,
+                              'k': 1,
                               'l': 0}, 'Result does not match'
 
 
