@@ -101,7 +101,7 @@ class Surface(DescendentAggregator):
     Olivia Surface Metric.
 
     SURFACE(n) is the number of transitive ascendants of a package 'n', i.e the number
-    or the number of packets in which a defect would potentially cause the compromise of 'n'.
+    of packets in which a defect would potentially cause the compromise of 'n'.
     """
 
     def __init__(self, olivia_model, **kwargs):
