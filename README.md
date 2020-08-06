@@ -3,6 +3,10 @@
 [![Build Status](https://travis-ci.org/dsr0018/olivia.svg?branch=master)](https://travis-ci.org/dsr0018/olivia)
 [![codecov](https://codecov.io/gh/dsr0018/olivia/branch/master/graph/badge.svg)](https://codecov.io/gh/dsr0018/olivia)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0b151ed6a3794874b1d3083e2532497d)](https://www.codacy.com/manual/dsr0018/olivia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dsr0018/olivia&amp;utm_campaign=Badge_Grade)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=alert_status)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=security_rating)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
 
 Open-source Library Indexes Vulnerability Identification and Analysis
 
