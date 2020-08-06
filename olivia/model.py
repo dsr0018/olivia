@@ -1,4 +1,3 @@
-
 """
 Olivia Model for studying the vulnerability of package dependency networks.
 
@@ -9,6 +8,77 @@ Includes tools for the analysis of package dependency networks vulnerability to 
 import networkx as nx
 import gzip
 import pickle
+import numpy as np
+
+from olivia.coupling import coupling_interface, coupling_profile
+
+
+class PackageInfoView:
+
+    """
+    Helper class for retrieving individual package information and metrics.
+
+    For network-wide analysis use suitable classes and methods from ~networkmetrics, ~packagemetrics or ~coupling
+    instead, as individual computation can be orders of magnitude slower.
+    """
+
+    def __init__(self, network, name):
+        """Create and initialize a PackageInfoView object."""
+        self._model = network
+        self._name = name
+
+    def transitive_dependencies(self):
+        """Return a set containing the transitive dependencies of the package."""
+        return nx.ancestors(self._model.network, self._name)
+
+    def transitive_dependants(self):
+        """Return a set containing the transitive dependants of the package."""
+        return nx.descendants(self._model.network, self._name)
+
+    def direct_dependencies(self):
+        """Return a set containing the direct dependencies of the package."""
+        return set(self._model.network.predecessors(self._name))
+
+    def direct_dependants(self):
+        """Return a set containing the direct dependants of the package."""
+        return set(self._model.network.successors(self._name))
+
+    def cluster(self):
+        """
+        Return the cluster of the package.
+
+        The cluster of a package is the set of packages in the network that are strongly connected to it in
+        the underlying graph -that is to say each of the packages in the cluster are transitively dependant on
+        each other.-
+        """
+        dag_id = self._model.dag.graph['mapping'][self._name]
+        return self._model.dag.nodes[dag_id]['members']
+
+    def reach(self):
+        """Return the value of the Olivia reach metric for the package."""
+        return len(nx.descendants(self._model.network, self._name)) + 1
+
+    def surface(self):
+        """Return the value of the Olivia surface metric for the package."""
+        return len(nx.ancestors(self._model.network, self._name)) + 1
+
+    def impact(self):
+        """Return the value of the Olivia impact metric for the package."""
+        out_degrees = self._model.network.subgraph({self._name} |
+                                                   nx.descendants(self._model.network, self._name)).out_degree()
+        return np.array([n[1] for n in out_degrees]).sum()
+
+    def coupling_interface_to(self, n):
+        """Return the coupling interface for this package over n."""
+        return coupling_interface(self._model, self._name, n)
+
+    def coupling_interface_from(self, n):
+        """Return the coupling interface for n over this package."""
+        return coupling_interface(self._model, n, self._name)
+
+    def coupling_profile(self):
+        """Return the coupling profile for this package."""
+        return coupling_profile(self._model, self._name)
 
 
 class OliviaNetwork:
@@ -112,6 +182,10 @@ class OliviaNetwork:
         else:
             self._metrics_cache[metric_class.__name__] = metric_class(self).compute()
         return self._metrics_cache[metric_class.__name__]
+
+    def __getitem__(self, package):
+        """Return a ~DegreeInfoView of the package."""
+        return PackageInfoView(self, package)
 
     def build_model(self, source):
         """
