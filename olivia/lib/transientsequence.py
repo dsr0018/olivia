@@ -1,3 +1,4 @@
+
 """TransientSequence class."""
 
 import pickle

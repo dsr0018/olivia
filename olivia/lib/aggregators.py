@@ -1,3 +1,4 @@
+
 """Aggregator base classes for computing metrics on Directed Acyclic Graphs."""
 
 from abc import abstractmethod, ABC

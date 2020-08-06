@@ -1,3 +1,4 @@
+
 """
 Olivia Model for studying the vulnerability of package dependency networks.
 
@@ -53,7 +54,7 @@ class OliviaNetwork:
         with gzip.GzipFile(file, 'rb') as f:
             load_dict = pickle.load(f)
 
-        self._network = nx.from_dict_of_lists(load_dict['network'])
+        self._network = nx.from_dict_of_lists(load_dict['network'], create_using=nx.DiGraph())
         self._dag = load_dict['dag']
         self._metrics_cache = load_dict['cache']
 
