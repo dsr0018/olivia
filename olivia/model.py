@@ -101,9 +101,9 @@ class OliviaNetwork:
 
         """
         if file is None:
-            self._dag = None
+            self._dag = {}
             self._metrics_cache = dict()  # In-model metrics cache
-            self._network = None
+            self._network = {}
         else:
             self.load(file)
 
@@ -183,9 +183,29 @@ class OliviaNetwork:
             self._metrics_cache[metric_class.__name__] = metric_class(self).compute()
         return self._metrics_cache[metric_class.__name__]
 
+    def clusters(self):
+        """
+        Return a generator of clusters from the network.
+
+        Clusters are sets of packages in which all the packages are transitively dependent on each other, so
+        clusters of more than one package imply the existence of cycles in the network.
+        This method generates the partition into strongly connected components of the directed graph
+        underlying the package network.
+        """
+        for p in self.dag:
+            yield self.dag.nodes[p]['members']
+
     def __getitem__(self, package):
         """Return a ~DegreeInfoView of the package."""
         return PackageInfoView(self, package)
+
+    def __len__(self):
+        """Return the number of packages in the network."""
+        return len(self.network)
+
+    def __iter__(self):
+        """Return an iterator over the packages in the network."""
+        return iter(self.network)
 
     def build_model(self, source):
         """

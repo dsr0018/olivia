@@ -87,6 +87,20 @@ def test_metric_cache():
         assert np.array_equal(metric.values, net.get_metric(func).values)
 
 
+def test_len():
+    assert len(OliviaNetwork()) == 0
+    assert len(net) == 12
+
+
+def test_iter():
+    void_net = OliviaNetwork()
+    assert len([n for n in void_net]) == 0
+    assert {n for n in net} == {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j', 'i', 'h', 'k', 'l'}
+
+def test_clusters():
+    assert list(OliviaNetwork().clusters()) == []
+    assert list(net.clusters()) == [{'j', 'k'}, {'g'}, {'h', 'i'}, {'f'}, {'b', 'c', 'd', 'e'}, {'l'}, {'a'}]
+
 def test_get_item():
     assert [net[n].reach() for n in net.network] == [12, 10, 10, 10, 10, 6, 3, 2, 4, 4, 2, 1]
     assert [net[n].surface() for n in net.network] == [1, 5, 5, 5, 5, 6, 7, 11, 8, 8, 11, 2]
