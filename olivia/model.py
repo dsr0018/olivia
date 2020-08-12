@@ -14,7 +14,6 @@ from olivia.coupling import coupling_interface, coupling_profile
 
 
 class PackageInfoView:
-
     """
     Helper class for retrieving individual package information and metrics.
 
@@ -82,7 +81,6 @@ class PackageInfoView:
 
 
 class OliviaNetwork:
-
     """
     Model for studying the vulnerability of package dependency networks.
 
@@ -194,6 +192,10 @@ class OliviaNetwork:
         """
         for p in self.dag:
             yield self.dag.nodes[p]['members']
+
+    def sorted_clusters(self):
+        """Return a list of clusters in reverse size order."""
+        return sorted(self.clusters(), key=lambda x: len(x), reverse=True)
 
     def __getitem__(self, package):
         """Return a ~DegreeInfoView of the package."""

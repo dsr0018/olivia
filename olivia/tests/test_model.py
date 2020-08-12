@@ -101,6 +101,10 @@ def test_clusters():
     assert list(OliviaNetwork().clusters()) == []
     assert list(net.clusters()) == [{'j', 'k'}, {'g'}, {'h', 'i'}, {'f'}, {'b', 'c', 'd', 'e'}, {'l'}, {'a'}]
 
+def test_sorted_clusters():
+    assert list(OliviaNetwork().sorted_clusters()) == []
+    assert net.sorted_clusters() == [{'b', 'c', 'd', 'e'}, {'j', 'k'}, {'h', 'i'}, {'g'},  {'f'},  {'l'}, {'a'}]
+
 def test_get_item():
     assert [net[n].reach() for n in net.network] == [12, 10, 10, 10, 10, 6, 3, 2, 4, 4, 2, 1]
     assert [net[n].surface() for n in net.network] == [1, 5, 5, 5, 5, 6, 7, 11, 8, 8, 11, 2]

@@ -1,4 +1,3 @@
-
 """Olivia package metrics for network vulnerability analysis."""
 
 import numbers
@@ -8,7 +7,6 @@ import numpy as np
 
 
 class Reach(AscendentAggregator):
-
     """
     Olivia Reach Metric.
 
@@ -51,7 +49,6 @@ class Reach(AscendentAggregator):
 
 
 class Impact(AscendentAggregator):
-
     """
     Olivia Impact Metric.
 
@@ -97,7 +94,6 @@ class Impact(AscendentAggregator):
 
 
 class Surface(DescendentAggregator):
-
     """
     Olivia Surface Metric.
 
@@ -140,7 +136,6 @@ class Surface(DescendentAggregator):
 
 
 class DependenciesCount:
-
     """
     Dependencies Count Metric.
 
@@ -173,7 +168,6 @@ class DependenciesCount:
 
 
 class DependentsCount:
-
     """
     Dependents Count Metric.
 
@@ -206,7 +200,6 @@ class DependentsCount:
 
 
 class MetricStats:
-
     """A helper class to store and manipulate Olivia metrics."""
 
     def __init__(self, results_dict, normalize_factor=1):
