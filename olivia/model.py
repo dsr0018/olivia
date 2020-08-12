@@ -157,7 +157,7 @@ class OliviaNetwork:
         """Return the model's underlying DAG graph."""
         return self._dag
 
-    def get_metric(self, metric_class):
+    def get_metric(self, metric_class, **kwargs):
         """
         Compute or get form the internal cache metric values for the packages in the network.
 
@@ -168,6 +168,8 @@ class OliviaNetwork:
         ----------
         metric_class: class
             Class implementing compute()
+        kwargs: keyword args
+            Arguments for the metric class constructor.
 
         Returns
         -------
@@ -178,7 +180,7 @@ class OliviaNetwork:
         if metric_class.__name__ in self._metrics_cache:
             print(f'{metric_class.__name__} retrieved from metrics cache')
         else:
-            self._metrics_cache[metric_class.__name__] = metric_class(self).compute()
+            self._metrics_cache[metric_class.__name__] = metric_class(self, **kwargs).compute()
         return self._metrics_cache[metric_class.__name__]
 
     def clusters(self):

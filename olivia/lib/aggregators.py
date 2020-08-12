@@ -46,7 +46,7 @@ class AscendentAggregator(ABC):
 
     """
 
-    def __init__(self, G, save_memory=False, compression_threshold=np.inf, mapping=None):
+    def __init__(self, G, save_memory=False, compression_threshold=1000, mapping=None):
         """
         Create and inits an AscendentAggregator.
     
