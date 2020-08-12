@@ -1,4 +1,3 @@
-
 """
 Olivia immunization functions.
 
@@ -7,7 +6,7 @@ Immunization analyzes in which packages it is better to invest to protect the ne
 
 import random
 
-from olivia.lib.graphs import removed
+from olivia.lib.graphs import removed, strong_articulation_points
 from olivia.model import OliviaNetwork
 from olivia.networkmetrics import failure_vulnerability
 from olivia.packagemetrics import Reach, DependentsCount, Impact, Surface
@@ -120,6 +119,45 @@ def iset_delta_frame_impact(olivia_model):
     delta_lower = olivia_model.get_metric(DependentsCount) * olivia_model.get_metric(Surface)
     max_lower = delta_lower.top()[0][1]
     return {p for p in olivia_model if delta_upper[p] > max_lower}
+
+
+def iset_sap(olivia_model, clusters=None):
+    """
+    Compute an immunization set detecting strong articulation points (SAP).
+
+    Immunization of SAP in the strongly connected components (SCC) of the network can be very effective
+    in networks with large SCCs.
+
+    Large SCC play a crucial role in increasing the vulnerability of networks of dependencies. Strong articulation
+    points are nodes whose removal would create additional strongly connected components, thus reducing the size of
+    the larger SCC.
+
+    The appearance of SCCs in real packet networks seems to follow a model similar to the formation of the giant
+    component in Erdős-Rényi models. So the size of the largest SCC is usually much larger than the rest.
+
+    The resulting set size is a product of the algorithm and cannot be selected.
+
+    Parameters
+    ----------
+    olivia_model: OliviaNetwork
+        Input network
+
+    clusters: sets of nodes
+        Iterable with sets of nodes forming SCCs in the network. If None the largest SCC is detected and used.
+
+    Returns
+    -------
+    immunization_set: set
+        Set of packages to be immunized corresponding to the SAP of the clusters.
+
+    """
+    if clusters is None:
+        clusters = [olivia_model.sorted_clusters()[0]]
+    sap = set()
+    for c in clusters:
+        scc = olivia_model.network.subgraph(c)
+        sap.update(strong_articulation_points(scc))
+    return sap
 
 
 def iset_random(olivia_model, set_size, indirect=False, seed=None):

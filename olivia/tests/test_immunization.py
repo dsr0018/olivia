@@ -42,3 +42,28 @@ def test_iset_delta_frame_impact():
 def test_iset_random():
     assert [iset_random(path, i, seed=1234) for i in range(len(path))] == [set(), {3}, {0, 3}, {0, 2, 3}]
     assert [iset_random(path, i, indirect=True, seed=1234) for i in range(len(path))] == [set(), {2}, {1, 2}, {0, 1, 2}]
+
+
+def test_iset_sap():
+    G = nx.complete_graph(5, create_using=nx.DiGraph())
+    net = OliviaNetwork()
+    net.build_model(G)
+    assert len(iset_sap(net)) == 0
+
+    S = nx.cycle_graph(5, create_using=nx.DiGraph())
+    net = OliviaNetwork()
+    net.build_model(S)
+    assert iset_sap(net) == {0, 1, 2, 3, 4}
+
+    T = nx.disjoint_union(nx.complete_graph(5, create_using=nx.DiGraph()),
+                          nx.complete_graph(5, create_using=nx.DiGraph()))
+    T.add_edges_from([[0, 10], [10, 7], [10, 0], [7, 10]])
+    net = OliviaNetwork()
+    net.build_model(T)
+    assert iset_sap(net) == {0, 7, 10}
+
+    M = nx.disjoint_union(T, S)
+    net = OliviaNetwork()
+    net.build_model(M)
+    assert iset_sap(net) == {0, 7, 10}
+    assert iset_sap(net, clusters=net.sorted_clusters()) == {0, 7, 10, 11, 12, 13, 14, 15}
