@@ -38,10 +38,12 @@ def immunization_delta(net, n, cost_metric=Reach):
 
     """
     f1 = failure_vulnerability(net, metric=cost_metric)
+    size_correction = (len(net.network)-len(n))/len(net.network)
     with removed(net.network, n):
         immunized_net = OliviaNetwork()
         immunized_net.build_model(net.network)
         f2 = failure_vulnerability(immunized_net, metric=cost_metric)
+    f2 = size_correction*f2
     return f1, f2, f1 - f2
 
 
