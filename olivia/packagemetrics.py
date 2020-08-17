@@ -237,7 +237,7 @@ class MetricStats:
         return self._results[index]
 
     def _build_index(self):
-        self._values = np.array([self.results_dict[k] for k in self.results_dict])
+        self._values = np.array([self.results_dict[k] for k in self.results_dict], dtype=np.int64)
         self._keys = np.array([k for k in self.results_dict.keys()])
         sorted_indexes = np.flip(np.argsort(self._values))
         self._sorted_keys = self._keys[sorted_indexes]
@@ -323,7 +323,7 @@ class MetricStats:
         if isinstance(other, numbers.Number):
             return MetricStats({e: self[e] * other for e in self.keys})
         else:
-            return MetricStats({e: self[e] * other[e] for e in self.keys})
+            return MetricStats({e: np.multiply(self[e], other[e], dtype=np.int64) for e in self.keys})
 
     def __truediv__(self, other):
         """Divide metric values element-wise or with a numeric constant."""
