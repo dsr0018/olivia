@@ -6,6 +6,10 @@ Immunization analyzes in which packages it is better to invest to protect the ne
 
 import random
 
+import networkx as nx
+
+from itertools import product
+
 from olivia.lib.graphs import removed, strong_articulation_points
 from olivia.model import OliviaNetwork
 from olivia.networkmetrics import failure_vulnerability
@@ -14,7 +18,7 @@ from olivia.packagemetrics import Reach, DependentsCount, Impact, Surface
 
 def immunization_delta(net, n, cost_metric=Reach):
     """
-    Compute the improvement in network Phi vulnerability by immunizing a certain set of packages.
+    Compute the improvement in network vulnerability by immunizing a certain set of packages.
 
     Parameters
     ----------
@@ -38,13 +42,34 @@ def immunization_delta(net, n, cost_metric=Reach):
 
     """
     f1 = failure_vulnerability(net, metric=cost_metric)
-    size_correction = (len(net.network)-len(n))/len(net.network)
+    size_correction = (len(net.network) - len(n)) / len(net.network)
     with removed(net.network, n):
         immunized_net = OliviaNetwork()
         immunized_net.build_model(net.network)
         f2 = failure_vulnerability(immunized_net, metric=cost_metric)
-    f2 = size_correction*f2
+    f2 = size_correction * f2
     return f1 - f2
+
+
+def _immunization_delta_analytic(net, n):
+    g = net.network
+    shunt = set()
+    a = set()
+    d = set()
+    s = set()
+    for node in n:
+        asc = nx.ancestors(g, node)
+        a.update(asc)
+        desc = nx.descendants(g, node)
+        d.update(desc)
+        s.update(set(product(asc | {node}, desc | {node})))
+    a = a - set(n)
+    d = d - set(n)
+    with removed(g, n):
+        for ancestor in a:
+            desc = nx.descendants(g, ancestor)
+            shunt.update({(ancestor, f) for f in desc})
+    return len(s - shunt) / len(g)
 
 
 def iset_naive_ranking(olivia_model, set_size, metric=Reach):
