@@ -32,11 +32,11 @@ def test_iset_naive_ranking():
 
 
 def test_iset_delta_frame_reach():
-    assert iset_delta_frame_reach(path) == {1, 2}
+    assert iset_delta_set_reach(path) == {1, 2}
 
 
 def test_iset_delta_frame_impact():
-    assert iset_delta_frame_impact(path) == {1}
+    assert iset_delta_set_impact(path) == {1}
 
 
 def test_iset_random():

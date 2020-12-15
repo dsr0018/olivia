@@ -69,11 +69,11 @@ def iset_naive_ranking(olivia_model, set_size, metric=Reach):
     return {p[0] for p in olivia_model.get_metric(metric).top(set_size)}
 
 
-def iset_delta_frame_reach(olivia_model):
+def iset_delta_set_reach(olivia_model):
     """
-    Compute an immunization set using the DELTA FRAME algorithm with the Reach metric.
+    Compute an immunization set using the DELTA SET algorithm with the Reach metric.
 
-    DELTA FRAME computes upper and lower bounds for the vulnerability reduction associated to the immunization of
+    DELTA SET computes upper and lower bounds for the vulnerability reduction associated to the immunization of
     each package in the network and returns a set that is guaranteed to contain the single optimum package for
     immunization.
 
@@ -96,11 +96,11 @@ def iset_delta_frame_reach(olivia_model):
     return {p for p in olivia_model if delta_upper[p] > max_lower}
 
 
-def iset_delta_frame_impact(olivia_model):
+def iset_delta_set_impact(olivia_model):
     """
-    Compute an immunization set using the DELTA FRAME algorithm with the Impact metric.
+    Compute an immunization set using the DELTA SET algorithm with the Impact metric.
 
-    DELTA FRAME computes upper and lower bounds for the vulnerability reduction associated to the immunization of
+    DELTA SET computes upper and lower bounds for the vulnerability reduction associated to the immunization of
     each package in the network and returns a set that is guaranteed to contain the single optimum package for
     immunization.
 
