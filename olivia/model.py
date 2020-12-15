@@ -42,12 +42,12 @@ class PackageInfoView:
         """Return a set containing the direct dependants of the package."""
         return set(self._model.network.successors(self._name))
 
-    def cluster(self):
+    def scc(self):
         """
-        Return the cluster of the package.
+        Return the strongly connected component(SCC) of the package.
 
-        The cluster of a package is the set of packages in the network that are strongly connected to it in
-        the underlying graph -that is to say each of the packages in the cluster are transitively dependant on
+        The SCC of a package is the set of packages in the network that are strongly connected to it in
+        the underlying graph -that is to say each of the packages in the scc are transitively dependant on
         each other.-
         """
         dag_id = self._model.dag.graph['mapping'][self._name]
@@ -183,12 +183,12 @@ class OliviaNetwork:
             self._metrics_cache[metric_class.__name__] = metric_class(self, **kwargs).compute()
         return self._metrics_cache[metric_class.__name__]
 
-    def clusters(self):
+    def sccs(self):
         """
-        Return a generator of clusters from the network.
+        Return a generator of strongly connected components (SCCs) present in the network.
 
-        Clusters are sets of packages in which all the packages are transitively dependent on each other, so
-        clusters of more than one package imply the existence of cycles in the network.
+        SCCs are sets of packages in which all the packages are transitively
+        dependent on each other, so SCCs of more than one package imply the existence of cycles in the network.
         This method generates the partition into strongly connected components of the directed graph
         underlying the package network.
         """
@@ -197,7 +197,7 @@ class OliviaNetwork:
 
     def sorted_clusters(self):
         """Return a list of clusters in reverse size order."""
-        return sorted(self.clusters(), key=lambda x: len(x), reverse=True)
+        return sorted(self.sccs(), key=lambda x: len(x), reverse=True)
 
     def __getitem__(self, package):
         """Return a ~DegreeInfoView of the package."""

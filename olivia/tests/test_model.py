@@ -98,8 +98,8 @@ def test_iter():
     assert {n for n in net} == {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'j', 'i', 'h', 'k', 'l'}
 
 def test_clusters():
-    assert list(OliviaNetwork().clusters()) == []
-    assert list(net.clusters()) == [{'j', 'k'}, {'g'}, {'h', 'i'}, {'f'}, {'b', 'c', 'd', 'e'}, {'l'}, {'a'}]
+    assert list(OliviaNetwork().sccs()) == []
+    assert list(net.sccs()) == [{'j', 'k'}, {'g'}, {'h', 'i'}, {'f'}, {'b', 'c', 'd', 'e'}, {'l'}, {'a'}]
 
 def test_sorted_clusters():
     assert list(OliviaNetwork().sorted_clusters()) == []
@@ -161,18 +161,18 @@ def test_get_item():
         {'j'},
         set()]
 
-    assert [net[n].cluster() for n in net.network] == [{'a'},
-                                                       {'b', 'c', 'd', 'e'},
-                                                       {'b', 'c', 'd', 'e'},
-                                                       {'b', 'c', 'd', 'e'},
-                                                       {'b', 'c', 'd', 'e'},
-                                                       {'f'},
-                                                       {'g'},
-                                                       {'j', 'k'},
-                                                       {'h', 'i'},
-                                                       {'h', 'i'},
-                                                       {'j', 'k'},
-                                                       {'l'}]
+    assert [net[n].scc() for n in net.network] == [{'a'},
+                                                   {'b', 'c', 'd', 'e'},
+                                                   {'b', 'c', 'd', 'e'},
+                                                   {'b', 'c', 'd', 'e'},
+                                                   {'b', 'c', 'd', 'e'},
+                                                   {'f'},
+                                                   {'g'},
+                                                   {'j', 'k'},
+                                                   {'h', 'i'},
+                                                   {'h', 'i'},
+                                                   {'j', 'k'},
+                                                   {'l'}]
 
     assert [net[n].coupling_profile() for n in net.network] == [{},
                                                                 {'a': {'a', 'e'}, 'e': {'e'}, 'd': {'e'}, 'c': {'e'}},

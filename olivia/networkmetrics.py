@@ -6,9 +6,9 @@ from olivia.packagemetrics import Reach
 
 def failure_vulnerability(olivia_model, metric=Reach, normalize=False):
     """
-    Compute Olivia Phi network vulnerability to failure metric.
+    Compute network vulnerability to failure metric.
 
-    Phi vulnerability to failure is the mean of some cost metric for the packages in the network, measuring
+    Vulnerability to failure is the mean of some cost metric for the packages in the network, measuring
     the expected cost caused by the failure of an uniformly chosen random package.
     For example, it corresponds to the expected number of packages (using the Reach metric)
     or dependencies (using the Impact metric) potentially compromised by the introduction of a defect into a random
@@ -30,7 +30,7 @@ def failure_vulnerability(olivia_model, metric=Reach, normalize=False):
     Returns
     -------
     vulnerability: float
-        Phi vulnerability to failure value.
+        Vulnerability to failure value.
 
     """
     ms = olivia_model.get_metric(metric)
@@ -42,9 +42,9 @@ def failure_vulnerability(olivia_model, metric=Reach, normalize=False):
 
 def attack_vulnerability(olivia_model, metric=Reach, normalize=False):
     """
-    Compute Olivia Phi network vulnerability to attack metric.
+    Compute network vulnerability to attack metric.
 
-    Phi vulnerability to attack is the maximum of some cost metric for the packages in the network, measuring
+    Vulnerability to attack is the maximum of some cost metric for the packages in the network, measuring
     the potential cost caused by a directed attack to the network.
     For example, it corresponds to the maximum number of packages (using the Reach metric)
     or dependencies (using the Impact metric) potentially compromised by the introduction of a defect into a package
@@ -66,7 +66,7 @@ def attack_vulnerability(olivia_model, metric=Reach, normalize=False):
     Returns
     -------
     vulnerability: float
-        Phi vulnerability to attack value.
+        Vulnerability to attack value.
 
     """
     ms = olivia_model.get_metric(metric)
