@@ -16,7 +16,7 @@ from olivia.networkmetrics import failure_vulnerability
 from olivia.packagemetrics import Reach, DependentsCount, Impact, Surface
 
 
-def immunization_delta(net, n, cost_metric=Reach):
+def immunization_delta(net, n, cost_metric=Reach, algorithm='network'):
     """
     Compute the improvement in network vulnerability by immunizing a certain set of packages.
 
@@ -28,19 +28,32 @@ def immunization_delta(net, n, cost_metric=Reach):
         Container of packages to be immunized.
     cost_metric: class, optional
         Metric to measure cost.
+    algorithm: 'network' or 'analytic'
 
     Returns
     -------
-    result: float, float, float
-        Initial vulnerability, vulnerability after immunization, difference.
+    result: float
+        Difference of network vulnerability after immunization of the elements in n.
 
     Notes
     -----
-    Implements the naive algorithm of removing immunized nodes and rebuilding model from scratch, so it is
-    really slow for big networks. Some obvious improvements could be made, but whether or not there is a
+    'network' algorithm Implements the naive algorithm of removing immunized nodes and rebuilding model from scratch,
+    so it is slow for big networks. Some obvious improvements could be made, but whether or not there is a
     much better alternative is an open question.
+    'analytic' algorithm uses only local information pertaining transitive relations of the elements to be
+    immunized. This is faster for smaller networks and/or smaller immunization sets but slower otherwise. Only
+    implemented for the Reach metric.
 
     """
+    if algorithm == 'network':
+        return _immunization_delta_network(net, n, cost_metric=cost_metric)
+    elif algorithm == 'analytic' and cost_metric == Reach:
+        return _immunization_delta_analytic(net, n)
+    else:
+        raise ValueError("Not implemented.")
+
+
+def _immunization_delta_network(net, n, cost_metric=Reach):
     f1 = failure_vulnerability(net, metric=cost_metric)
     size_correction = (len(net.network) - len(n)) / len(net.network)
     with removed(net.network, n):

@@ -11,7 +11,12 @@ path.build_model(nx.path_graph(4, create_using=nx.DiGraph))
 
 def test_immunization_delta():
     assert [immunization_delta(path, n) for n in itertools.combinations(path, 2)] == [1.75, 2.0, 1.75, 2.0, 2.0, 1.75]
-    assert [immunization_delta(path, n, cost_metric=Impact) for n in itertools.combinations(path, 2)] == [1.25, 1.5, 1.25, 1.5, 1.5, 1.25]
+    assert [immunization_delta(path, n, cost_metric=Impact) for n in itertools.combinations(path, 2)] == [1.25, 1.5,
+                                                                                                          1.25, 1.5,
+                                                                                                          1.5, 1.25]
+    assert [immunization_delta(path, n, algorithm='analytic') for n in itertools.combinations(path, 2)] == [1.75, 2.0,
+                                                                                                            1.75, 2.0,
+                                                                                                            2.0, 1.75]
 
 
 def test_iset_naive_ranking():
