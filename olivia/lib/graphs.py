@@ -30,6 +30,7 @@ def removed(g, n):
     try:
         yield
     finally:
+        g.add_nodes_from(n)
         g.add_edges_from(in_rem)
         g.add_edges_from(out_rem)
 
