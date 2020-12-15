@@ -44,7 +44,7 @@ def immunization_delta(net, n, cost_metric=Reach):
         immunized_net.build_model(net.network)
         f2 = failure_vulnerability(immunized_net, metric=cost_metric)
     f2 = size_correction*f2
-    return f1, f2, f1 - f2
+    return f1 - f2
 
 
 def iset_naive_ranking(olivia_model, set_size, metric=Reach):
