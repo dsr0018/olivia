@@ -302,6 +302,7 @@ class MetricStats:
             return
         for k in self._results:
             self._results[k] = self._results[k] / self._normalize_factor
+        self._normalized = True
         self._build_index()
 
     def __add__(self, other):

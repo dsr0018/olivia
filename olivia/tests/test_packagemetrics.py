@@ -116,7 +116,8 @@ def test_metric_stats():
     assert ms.bottom(2) == [('b', 4), ('a', 2)]
     ms.normalize()
     assert np.array_equal(ms.values, np.array([1, 2, 3]))
-
+    ms.normalize()
+    assert np.array_equal(ms.values, np.array([1, 2, 3]))
 
 def test_metric_ops():
     ms1 = MetricStats({'a': 2, 'b': 4, 'c': 6})
