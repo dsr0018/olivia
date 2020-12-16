@@ -1,6 +1,6 @@
 # OLIVIA
 
-[![Build Status](https://travis-ci.org/dsr0018/olivia.svg?branch=master)](https://travis-ci.org/dsr0018/olivia)
+[![Build Status](https://travis-ci.com/dsr0018/olivia.svg?branch=master)](https://travis-ci.com/dsr0018/olivia)
 [![codecov](https://codecov.io/gh/dsr0018/olivia/branch/master/graph/badge.svg)](https://codecov.io/gh/dsr0018/olivia)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/0b151ed6a3794874b1d3083e2532497d)](https://www.codacy.com/manual/dsr0018/olivia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dsr0018/olivia&amp;utm_campaign=Badge_Grade)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=alert_status)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
