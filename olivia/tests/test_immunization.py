@@ -1,5 +1,6 @@
 import networkx as nx
 import itertools
+import pytest
 
 from olivia.immunization import *
 from olivia.model import OliviaNetwork
@@ -17,6 +18,8 @@ def test_immunization_delta():
     assert [immunization_delta(path, n, algorithm='analytic') for n in itertools.combinations(path, 2)] == [1.75, 2.0,
                                                                                                             1.75, 2.0,
                                                                                                             2.0, 1.75]
+    with pytest.raises(ValueError):
+        _ = immunization_delta(path, [1], cost_metric=Impact, algorithm='analytic')
 
 
 def test_iset_naive_ranking():
