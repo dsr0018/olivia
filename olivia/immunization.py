@@ -80,7 +80,7 @@ def _immunization_delta_analytic(net, n):
     d = d - set(n)
     with removed(g, n):
         for ancestor in a:
-            desc = nx.descendants(g, ancestor)
+            desc = nx.descendants(g, ancestor) | {ancestor}
             shunt.update({(ancestor, f) for f in desc})
     return len(s - shunt) / len(g)
 

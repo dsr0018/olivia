@@ -9,6 +9,27 @@ from olivia.packagemetrics import Impact
 path = OliviaNetwork()
 path.build_model(nx.path_graph(4, create_using=nx.DiGraph))
 
+G = nx.DiGraph()
+G.add_edges_from((['a', 'b'],
+                  ['b', 'c'],
+                  ['c', 'd'],
+                  ['d', 'e'],
+                  ['e', 'b'],
+                  ['d', 'f'],
+                  ['f', 'g'],
+                  ['g', 'j'],
+                  ['f', 'i'],
+                  ['f', 'h'],
+                  ['i', 'h'],
+                  ['h', 'i'],
+                  ['i', 'j'],
+                  ['h', 'k'],
+                  ['j', 'k'],
+                  ['k', 'j'],
+                  ['a', 'l']))
+
+net = OliviaNetwork()
+net.build_model(G)
 
 def test_immunization_delta():
     assert [immunization_delta(path, n) for n in itertools.combinations(path, 2)] == [1.75, 2.0, 1.75, 2.0, 2.0, 1.75]
@@ -18,8 +39,21 @@ def test_immunization_delta():
     assert [immunization_delta(path, n, algorithm='analytic') for n in itertools.combinations(path, 2)] == [1.75, 2.0,
                                                                                                             1.75, 2.0,
                                                                                                             2.0, 1.75]
+
+    assert immunization_delta(path, {}) == 0.0
+    assert immunization_delta(path, {}, algorithm='analytic') == 0.0
+
     with pytest.raises(ValueError):
         _ = immunization_delta(path, [1], cost_metric=Impact, algorithm='analytic')
+
+    assert immunization_delta(net, {'b'}) == pytest.approx(2.66666666666)
+    assert immunization_delta(net, {'b'}, algorithm='analytic') == pytest.approx(2.66666666666)
+
+    assert immunization_delta(net, {'b', 'f'}) == pytest.approx(4.16666666666)
+    assert immunization_delta(net, {'b', 'f'}, algorithm='analytic') == pytest.approx(4.16666666666)
+
+    assert immunization_delta(net, {'b', 'f', 'k', 'i', 'a'}) == 5.25
+    assert immunization_delta(net, {'b', 'f', 'k', 'i', 'a'}, algorithm='analytic') == 5.25
 
 
 def test_iset_naive_ranking():
