@@ -85,7 +85,7 @@ def _immunization_delta_analytic(net, n):
     return len(s - shunt) / len(g)
 
 
-def iset_naive_ranking(olivia_model, set_size, metric=Reach):
+def iset_naive_ranking(olivia_model, set_size, ms, subset=None):
     """
     Compute an immunization set by selecting top elements according to a metric.
 
@@ -95,8 +95,10 @@ def iset_naive_ranking(olivia_model, set_size, metric=Reach):
         Input network
     set_size: int
         Number of packages in the immunization set.
-    metric: class, optional
+    ms: metricStats
         Metric to measure cost.
+    subset: container of nodes
+        subset of packages to limit the ranking to
 
     Returns
     -------
@@ -104,7 +106,7 @@ def iset_naive_ranking(olivia_model, set_size, metric=Reach):
         Set of packages to be immunized.
 
     """
-    return {p[0] for p in olivia_model.get_metric(metric).top(set_size)}
+    return {p[0] for p in ms.top(set_size, subset)}
 
 
 def iset_delta_set_reach(olivia_model):

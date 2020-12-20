@@ -112,8 +112,10 @@ def test_metric_stats():
 
     assert ms.top() == [('c', 6)]
     assert ms.top(2) == [('c', 6), ('b', 4)]
+    assert ms.top(2, subset={'a', 'b'}) == [('b', 4), ('a', 2)]
     assert ms.bottom() == [('a', 2)]
     assert ms.bottom(2) == [('b', 4), ('a', 2)]
+    assert ms.bottom(2, subset={'a', 'c'}) == [('a', 2), ('c', 6)]
     ms.normalize()
     assert np.array_equal(ms.values, np.array([1, 2, 3]))
     ms.normalize()

@@ -31,6 +31,7 @@ G.add_edges_from((['a', 'b'],
 net = OliviaNetwork()
 net.build_model(G)
 
+
 def test_immunization_delta():
     assert [immunization_delta(path, n) for n in itertools.combinations(path, 2)] == [1.75, 2.0, 1.75, 2.0, 2.0, 1.75]
     assert [immunization_delta(path, n, cost_metric=Impact) for n in itertools.combinations(path, 2)] == [1.25, 1.5,
@@ -57,9 +58,12 @@ def test_immunization_delta():
 
 
 def test_iset_naive_ranking():
-    assert [iset_naive_ranking(path, i) for i in range(1, len(path) + 1)] == [{0}, {0, 1}, {0, 1, 2}, {0, 1, 2, 3}]
-    assert [iset_naive_ranking(path, i, metric=Impact) for i in range(1, len(path) + 1)] == [{0}, {0, 1}, {0, 1, 2},
-                                                                                             {0, 1, 2, 3}]
+    assert [iset_naive_ranking(path, i, path.get_metric(Reach)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
+                                                                                                      {0, 1, 2},
+                                                                                                      {0, 1, 2, 3}]
+    assert [iset_naive_ranking(path, i, path.get_metric(Impact)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
+                                                                                                       {0, 1, 2},
+                                                                                                       {0, 1, 2, 3}]
 
 
 def test_iset_delta_frame_reach():

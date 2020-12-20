@@ -242,7 +242,7 @@ class MetricStats:
         sorted_indexes = np.flip(np.argsort(self._values))
         self._sorted_keys = self._keys[sorted_indexes]
 
-    def top(self, n=1):
+    def top(self, n=1, subset=None):
         """
         Return the top 'n' elements according to its metric value.
 
@@ -250,6 +250,8 @@ class MetricStats:
         ----------
         n: int
             number of top packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
 
         Returns
         -------
@@ -257,9 +259,18 @@ class MetricStats:
             List of top n (package, metric value) tuples.
 
         """
-        return [(k, self._results[k]) for k in self._sorted_keys[:n]]
+        if subset:
+            result = []
+            for k in self._sorted_keys:
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[:n]]
 
-    def bottom(self, n=1):
+    def bottom(self, n=1, subset=None):
         """
         Return the bottom 'n' elements according to its metric value.
 
@@ -267,6 +278,8 @@ class MetricStats:
         ----------
         n: int
             number of bottom packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
 
         Returns
         -------
@@ -274,7 +287,17 @@ class MetricStats:
             List of bottom n (package, metric value) tuples.
 
         """
-        return [(k, self._results[k]) for k in self._sorted_keys[-n:]]
+        if subset:
+            result = []
+            for k in reversed(self._sorted_keys):
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[-n:]]
+
 
     @property
     def values(self):
