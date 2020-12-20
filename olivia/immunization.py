@@ -85,14 +85,12 @@ def _immunization_delta_analytic(net, n):
     return len(s - shunt) / len(g)
 
 
-def iset_naive_ranking(olivia_model, set_size, ms, subset=None):
+def iset_naive_ranking(set_size, ms, subset=None):
     """
     Compute an immunization set by selecting top elements according to a metric.
 
     Parameters
     ----------
-    olivia_model: OliviaNetwork
-        Input network
     set_size: int
         Number of packages in the immunization set.
     ms: metricStats

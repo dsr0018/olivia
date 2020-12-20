@@ -58,12 +58,12 @@ def test_immunization_delta():
 
 
 def test_iset_naive_ranking():
-    assert [iset_naive_ranking(path, i, path.get_metric(Reach)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
-                                                                                                      {0, 1, 2},
-                                                                                                      {0, 1, 2, 3}]
-    assert [iset_naive_ranking(path, i, path.get_metric(Impact)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
-                                                                                                       {0, 1, 2},
-                                                                                                       {0, 1, 2, 3}]
+    assert [iset_naive_ranking(i, path.get_metric(Reach)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
+                                                                                                {0, 1, 2},
+                                                                                                {0, 1, 2, 3}]
+    assert [iset_naive_ranking(i, path.get_metric(Impact)) for i in range(1, len(path) + 1)] == [{0}, {0, 1},
+                                                                                                 {0, 1, 2},
+                                                                                                 {0, 1, 2, 3}]
 
 
 def test_iset_delta_frame_reach():
