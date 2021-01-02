@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>olivia.lib.aggregators API documentation</title>
+<meta name="description" content="Aggregator base classes for computing metrics on Directed Acyclic Graphs." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>olivia.lib.aggregators</code></h1>
+</header>
+<section id="section-intro">
+<p>Aggregator base classes for computing metrics on Directed Acyclic Graphs.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Aggregator base classes for computing metrics on Directed Acyclic Graphs.&#34;&#34;&#34;
+
+from abc import abstractmethod, ABC
+import numpy as np
+import networkx as nx
+from intbitset import intbitset
+
+from olivia.lib.transientsequence import TransientSequence
+
+
+class AscendentAggregator(ABC):
+
+    &#34;&#34;&#34;
+    Base class for the network-wide computation of ascendent aggregation metrics.
+
+    Ascendent aggregation metrics are values computed for each node as a function of the node and the set of its
+    transitive descendants. The aggregation function must be implemented in the subclasses.
+
+    The reversed topological order of the network is used to compute descendant sets in a relatively efficient manner,
+    using a modified version of the Goralcikova-Koubek algorithm [1].
+
+    Thus input graph must be acyclic and it is expected to be indexed by reversed topological order.
+
+    [1] Goralčíková, Alla, and Václav Koubek. &#34;A reduct-and-closure algorithm for graphs.&#34; International Symposium
+    on Mathematical Foundations of Computer Science. Springer, Berlin, Heidelberg, 1979.
+
+    Parameters
+    ----------
+    G: Networkx DiGraph
+        Input acyclic graph indexed in reverse topological order.
+    save_memory: bool, optional
+         Set to True to free descendant sets that are no longer needed. Depending on the network
+         topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.
+    compression_threshold: int
+         Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in
+         memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+         may reduce drastically the amount of RAM needed at the expense of speed.
+    mapping: dict
+        If a mapping is provided, computation returns a dictionary values for each key according to value indexes.
+        If not, a raw array indexed by node is returned.
+
+    Notes
+    -----
+    Stores descendant sets in instances of ~olivia.lib.transientsequence.TransientSequence
+
+    &#34;&#34;&#34;
+
+    def __init__(self, G, save_memory=False, compression_threshold=1000, mapping=None):
+        &#34;&#34;&#34;
+        Create and inits an AscendentAggregator.
+    
+        Parameters
+        ----------
+        G: Networkx DiGraph
+            Input acyclic graph indexed in reverse topological order.
+        save_memory: bool, optional
+             Set to True to free descendant sets that are no longer needed. Depending on the network
+             topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.
+        compression_threshold: int
+             Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in 
+             memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+             may reduce drastically the amount of RAM needed at the expense of speed.
+        mapping: dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        self._G = G
+        self._topological_order = range(len(G))
+        self._save_memory = save_memory
+        self._compression_threshold = compression_threshold
+        self._descendants = None
+        self._mapping = mapping
+        self._dag_result = None
+
+    def _ascendent_aggregation(self):
+        &#34;&#34;&#34;
+        Compute the aggregation function over the network.
+
+        Computes descendant sets in reversed topological order and stores the result of the aggregation
+        function in _dag_result
+
+        Returns
+        -------
+        None
+
+        &#34;&#34;&#34;
+        for n in self._topological_order:
+            if not n % 1000:
+                print(&#39;     Processing node: &#39;+str(n // 1000)+&#39;K      &#39;, end=&#39;\r&#39;, flush=True)
+            tempset = intbitset()
+            for m in self._G[n]:
+                if m not in tempset:
+                    tempset.update(self._descendants[m])
+                    tempset.add(m)
+            self._descendants[n] = tempset
+            self._dag_result[n] = self._aggregation(n, tempset)
+        print()
+
+    @abstractmethod
+    def _aggregation(self, n, descendants):
+        &#34;&#34;&#34;
+        Return the value of the aggregation function.
+
+        Parameters
+        ----------
+        n: int
+            index of the current node
+        descendants: iterable
+            set of transitive descendants of n
+
+        Returns
+        -------
+        value: int or object
+            Value of the aggregation function for n and its descendants.
+
+        &#34;&#34;&#34;
+        pass
+
+    def _setup(self):
+        &#34;&#34;&#34;
+        Init internal structures for computation.
+
+        Returns
+        -------
+        None
+
+        &#34;&#34;&#34;
+
+        def intbitset_decompressor(v):
+            out = intbitset()
+            intbitset.fastload(out, v)
+            return out
+
+        self._dag_result = np.zeros(len(self._G), dtype=&#39;int32&#39;)
+        if self._save_memory:
+            expiry = [self._G.in_degree()[n] for n in self._G]
+        else:
+            expiry = None
+        self._descendants = TransientSequence(len(self._G),
+                                              class_type=intbitset,
+                                              compressor=intbitset.fastdump,
+                                              decompressor=intbitset_decompressor,
+                                              compression_threshold=self._compression_threshold,
+                                              expiry_array=expiry)
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the ascendent aggregation metric defined by the aggregation function.
+
+        Returns
+        -------
+        result: numpy.array or dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        self._setup()
+        self._ascendent_aggregation()
+        if self._mapping is None:
+            return self._dag_result
+        else:
+            return {n: self._dag_result[self._mapping[n]] for n in self._mapping}
+
+
+class DescendentAggregator(AscendentAggregator, ABC):
+
+    &#34;&#34;&#34;
+    Abstract subclass of DescendentAggregator for inverting the computing direction.
+
+    Aggregation process is carried in topological order over the reversed input graph.
+    &#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        &#34;&#34;&#34;Create and init an DescendentAggregator.&#34;&#34;&#34;
+        super(DescendentAggregator, self).__init__(*args, **kwargs)
+        self._topological_order = reversed(self._topological_order)
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the descendent aggregation metric defined by the aggregation function.
+
+        Returns
+        -------
+        result: numpy.array or dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        with nx.utils.contextmanagers.reversed(self._G):
+            return super(DescendentAggregator, self).compute()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="olivia.lib.aggregators.AscendentAggregator"><code class="flex name class">
+<span>class <span class="ident">AscendentAggregator</span></span>
+<span>(</span><span>G, save_memory=False, compression_threshold=1000, mapping=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Base class for the network-wide computation of ascendent aggregation metrics.</p>
+<p>Ascendent aggregation metrics are values computed for each node as a function of the node and the set of its
+transitive descendants. The aggregation function must be implemented in the subclasses.</p>
+<p>The reversed topological order of the network is used to compute descendant sets in a relatively efficient manner,
+using a modified version of the Goralcikova-Koubek algorithm [1].</p>
+<p>Thus input graph must be acyclic and it is expected to be indexed by reversed topological order.</p>
+<p>[1] Goralčíková, Alla, and Václav Koubek. "A reduct-and-closure algorithm for graphs." International Symposium
+on Mathematical Foundations of Computer Science. Springer, Berlin, Heidelberg, 1979.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>G</code></strong> :&ensp;<code>Networkx DiGraph</code></dt>
+<dd>Input acyclic graph indexed in reverse topological order.</dd>
+<dt><strong><code>save_memory</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Set to True to free descendant sets that are no longer needed. Depending on the network
+topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.</dd>
+<dt><strong><code>compression_threshold</code></strong> :&ensp;<code>int</code></dt>
+<dd>Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in
+memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+may reduce drastically the amount of RAM needed at the expense of speed.</dd>
+<dt><strong><code>mapping</code></strong> :&ensp;<code>dict</code></dt>
+<dd>If a mapping is provided, computation returns a dictionary values for each key according to value indexes.
+If not, a raw array indexed by node is returned.</dd>
+</dl>
+<h2 id="notes">Notes</h2>
+<p>Stores descendant sets in instances of ~olivia.lib.transientsequence.TransientSequence</p>
+<p>Create and inits an AscendentAggregator.</p>
+<h2 id="parameters_1">Parameters</h2>
+<dl>
+<dt><strong><code>G</code></strong> :&ensp;<code>Networkx DiGraph</code></dt>
+<dd>Input acyclic graph indexed in reverse topological order.</dd>
+<dt><strong><code>save_memory</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Set to True to free descendant sets that are no longer needed. Depending on the network
+topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.</dd>
+<dt><strong><code>compression_threshold</code></strong> :&ensp;<code>int</code></dt>
+<dd>Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in
+memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+may reduce drastically the amount of RAM needed at the expense of speed.</dd>
+<dt><strong><code>mapping</code></strong> :&ensp;<code>dict</code></dt>
+<dd>If a mapping is provided, computation returns a dictionary with values for each key
+according to value indexes.
+If not, a raw array indexed by node is returned.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AscendentAggregator(ABC):
+
+    &#34;&#34;&#34;
+    Base class for the network-wide computation of ascendent aggregation metrics.
+
+    Ascendent aggregation metrics are values computed for each node as a function of the node and the set of its
+    transitive descendants. The aggregation function must be implemented in the subclasses.
+
+    The reversed topological order of the network is used to compute descendant sets in a relatively efficient manner,
+    using a modified version of the Goralcikova-Koubek algorithm [1].
+
+    Thus input graph must be acyclic and it is expected to be indexed by reversed topological order.
+
+    [1] Goralčíková, Alla, and Václav Koubek. &#34;A reduct-and-closure algorithm for graphs.&#34; International Symposium
+    on Mathematical Foundations of Computer Science. Springer, Berlin, Heidelberg, 1979.
+
+    Parameters
+    ----------
+    G: Networkx DiGraph
+        Input acyclic graph indexed in reverse topological order.
+    save_memory: bool, optional
+         Set to True to free descendant sets that are no longer needed. Depending on the network
+         topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.
+    compression_threshold: int
+         Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in
+         memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+         may reduce drastically the amount of RAM needed at the expense of speed.
+    mapping: dict
+        If a mapping is provided, computation returns a dictionary values for each key according to value indexes.
+        If not, a raw array indexed by node is returned.
+
+    Notes
+    -----
+    Stores descendant sets in instances of ~olivia.lib.transientsequence.TransientSequence
+
+    &#34;&#34;&#34;
+
+    def __init__(self, G, save_memory=False, compression_threshold=1000, mapping=None):
+        &#34;&#34;&#34;
+        Create and inits an AscendentAggregator.
+    
+        Parameters
+        ----------
+        G: Networkx DiGraph
+            Input acyclic graph indexed in reverse topological order.
+        save_memory: bool, optional
+             Set to True to free descendant sets that are no longer needed. Depending on the network
+             topology this can save 10 to 50% (and possibly more in large sparse networks) RAM required by the proccess.
+        compression_threshold: int
+             Descendant sets with sizes larger that this value will be dynamically compressed and decompressed in 
+             memory. Use 0 to compress all descendant sets and np.inf for no compression. Depending on the network this
+             may reduce drastically the amount of RAM needed at the expense of speed.
+        mapping: dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        self._G = G
+        self._topological_order = range(len(G))
+        self._save_memory = save_memory
+        self._compression_threshold = compression_threshold
+        self._descendants = None
+        self._mapping = mapping
+        self._dag_result = None
+
+    def _ascendent_aggregation(self):
+        &#34;&#34;&#34;
+        Compute the aggregation function over the network.
+
+        Computes descendant sets in reversed topological order and stores the result of the aggregation
+        function in _dag_result
+
+        Returns
+        -------
+        None
+
+        &#34;&#34;&#34;
+        for n in self._topological_order:
+            if not n % 1000:
+                print(&#39;     Processing node: &#39;+str(n // 1000)+&#39;K      &#39;, end=&#39;\r&#39;, flush=True)
+            tempset = intbitset()
+            for m in self._G[n]:
+                if m not in tempset:
+                    tempset.update(self._descendants[m])
+                    tempset.add(m)
+            self._descendants[n] = tempset
+            self._dag_result[n] = self._aggregation(n, tempset)
+        print()
+
+    @abstractmethod
+    def _aggregation(self, n, descendants):
+        &#34;&#34;&#34;
+        Return the value of the aggregation function.
+
+        Parameters
+        ----------
+        n: int
+            index of the current node
+        descendants: iterable
+            set of transitive descendants of n
+
+        Returns
+        -------
+        value: int or object
+            Value of the aggregation function for n and its descendants.
+
+        &#34;&#34;&#34;
+        pass
+
+    def _setup(self):
+        &#34;&#34;&#34;
+        Init internal structures for computation.
+
+        Returns
+        -------
+        None
+
+        &#34;&#34;&#34;
+
+        def intbitset_decompressor(v):
+            out = intbitset()
+            intbitset.fastload(out, v)
+            return out
+
+        self._dag_result = np.zeros(len(self._G), dtype=&#39;int32&#39;)
+        if self._save_memory:
+            expiry = [self._G.in_degree()[n] for n in self._G]
+        else:
+            expiry = None
+        self._descendants = TransientSequence(len(self._G),
+                                              class_type=intbitset,
+                                              compressor=intbitset.fastdump,
+                                              decompressor=intbitset_decompressor,
+                                              compression_threshold=self._compression_threshold,
+                                              expiry_array=expiry)
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the ascendent aggregation metric defined by the aggregation function.
+
+        Returns
+        -------
+        result: numpy.array or dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        self._setup()
+        self._ascendent_aggregation()
+        if self._mapping is None:
+            return self._dag_result
+        else:
+            return {n: self._dag_result[self._mapping[n]] for n in self._mapping}</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="olivia.lib.aggregators.DescendentAggregator" href="#olivia.lib.aggregators.DescendentAggregator">DescendentAggregator</a></li>
+<li><a title="olivia.packagemetrics.Impact" href="../packagemetrics.html#olivia.packagemetrics.Impact">Impact</a></li>
+<li><a title="olivia.packagemetrics.Reach" href="../packagemetrics.html#olivia.packagemetrics.Reach">Reach</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.lib.aggregators.AscendentAggregator.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the ascendent aggregation metric defined by the aggregation function.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>numpy.array</code> or <code>dict</code></dt>
+<dd>If a mapping is provided, computation returns a dictionary with values for each key
+according to value indexes.
+If not, a raw array indexed by node is returned.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the ascendent aggregation metric defined by the aggregation function.
+
+    Returns
+    -------
+    result: numpy.array or dict
+        If a mapping is provided, computation returns a dictionary with values for each key
+        according to value indexes.
+        If not, a raw array indexed by node is returned.
+
+    &#34;&#34;&#34;
+    self._setup()
+    self._ascendent_aggregation()
+    if self._mapping is None:
+        return self._dag_result
+    else:
+        return {n: self._dag_result[self._mapping[n]] for n in self._mapping}</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.lib.aggregators.DescendentAggregator"><code class="flex name class">
+<span>class <span class="ident">DescendentAggregator</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Abstract subclass of DescendentAggregator for inverting the computing direction.</p>
+<p>Aggregation process is carried in topological order over the reversed input graph.</p>
+<p>Create and init an DescendentAggregator.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DescendentAggregator(AscendentAggregator, ABC):
+
+    &#34;&#34;&#34;
+    Abstract subclass of DescendentAggregator for inverting the computing direction.
+
+    Aggregation process is carried in topological order over the reversed input graph.
+    &#34;&#34;&#34;
+
+    def __init__(self, *args, **kwargs):
+        &#34;&#34;&#34;Create and init an DescendentAggregator.&#34;&#34;&#34;
+        super(DescendentAggregator, self).__init__(*args, **kwargs)
+        self._topological_order = reversed(self._topological_order)
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the descendent aggregation metric defined by the aggregation function.
+
+        Returns
+        -------
+        result: numpy.array or dict
+            If a mapping is provided, computation returns a dictionary with values for each key
+            according to value indexes.
+            If not, a raw array indexed by node is returned.
+
+        &#34;&#34;&#34;
+        with nx.utils.contextmanagers.reversed(self._G):
+            return super(DescendentAggregator, self).compute()</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="olivia.lib.aggregators.AscendentAggregator" href="#olivia.lib.aggregators.AscendentAggregator">AscendentAggregator</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="olivia.packagemetrics.Surface" href="../packagemetrics.html#olivia.packagemetrics.Surface">Surface</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.lib.aggregators.DescendentAggregator.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the descendent aggregation metric defined by the aggregation function.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>numpy.array</code> or <code>dict</code></dt>
+<dd>If a mapping is provided, computation returns a dictionary with values for each key
+according to value indexes.
+If not, a raw array indexed by node is returned.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the descendent aggregation metric defined by the aggregation function.
+
+    Returns
+    -------
+    result: numpy.array or dict
+        If a mapping is provided, computation returns a dictionary with values for each key
+        according to value indexes.
+        If not, a raw array indexed by node is returned.
+
+    &#34;&#34;&#34;
+    with nx.utils.contextmanagers.reversed(self._G):
+        return super(DescendentAggregator, self).compute()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="olivia.lib" href="index.html">olivia.lib</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="olivia.lib.aggregators.AscendentAggregator" href="#olivia.lib.aggregators.AscendentAggregator">AscendentAggregator</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.lib.aggregators.AscendentAggregator.compute" href="#olivia.lib.aggregators.AscendentAggregator.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.lib.aggregators.DescendentAggregator" href="#olivia.lib.aggregators.DescendentAggregator">DescendentAggregator</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.lib.aggregators.DescendentAggregator.compute" href="#olivia.lib.aggregators.DescendentAggregator.compute">compute</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

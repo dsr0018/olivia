@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>olivia.packagemetrics API documentation</title>
+<meta name="description" content="Olivia package metrics for network vulnerability analysis." />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>olivia.packagemetrics</code></h1>
+</header>
+<section id="section-intro">
+<p>Olivia package metrics for network vulnerability analysis.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;Olivia package metrics for network vulnerability analysis.&#34;&#34;&#34;
+
+import numbers
+
+from olivia.lib.aggregators import AscendentAggregator, DescendentAggregator
+import numpy as np
+
+
+class Reach(AscendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Reach Metric.
+
+    REACH(n) is the number of transitive descendants for a package &#39;n&#39;, i.e. the number of
+    potentially affected packages by a defect in &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create a Reach metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x][&#39;members&#39;]) for x in olivia_model.dag])
+
+    def _aggregation(self, n, descendants):
+        return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Reach metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Reach&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
+
+
+class Impact(AscendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Impact Metric.
+
+    IMPACT(n) is the number of dependencies induced by a package &#39;n&#39;, or the size of the edge set
+    of the subgraph induced by transitive descendants of n. It is the amount of dependencies that would be potentially
+    compromised in the network by a defect in &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create an Impact metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        odegree = olivia_model.dag.out_degree(weight=&#39;weight&#39;)
+        intra_edges = np.array([olivia_model.dag.nodes[n][&#39;intra_edges&#39;] for n in olivia_model.dag])
+        self._out = np.array([odegree[n] for n in olivia_model.dag]) + intra_edges
+
+    def _aggregation(self, n, descendants):
+        return self._out[descendants].sum() + self._out[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Impact metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Impact&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._out.sum())
+
+
+class Surface(DescendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Surface Metric.
+
+    SURFACE(n) is the number of transitive ascendants of a package &#39;n&#39;, i.e the number
+    of packets in which a defect would potentially cause the compromise of &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create an Impact metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x][&#39;members&#39;]) for x in olivia_model.dag])
+
+    def _aggregation(self, n, descendants):
+        return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Surface metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Surface&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())
+
+
+class DependenciesCount:
+    &#34;&#34;&#34;
+    Dependencies Count Metric.
+
+    Number of direct dependencies of a package.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model):
+        &#34;&#34;&#34;
+        Create a DependenciesCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        &#34;&#34;&#34;
+        self.net = olivia_model
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Dependencies Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Dependencies Count&#34;)
+        return MetricStats({package: self.net.network.in_degree(package) for package in self.net.network})
+
+
+class DependentsCount:
+    &#34;&#34;&#34;
+    Dependents Count Metric.
+
+    Number of direct dependents of a package.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model):
+        &#34;&#34;&#34;
+        Create a DependentsCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        &#34;&#34;&#34;
+        self.net = olivia_model
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Dependents Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Dependents Count&#34;)
+        return MetricStats({package: self.net.network.out_degree(package) for package in self.net.network})
+
+
+class MetricStats:
+    &#34;&#34;&#34;A helper class to store and manipulate Olivia metrics.&#34;&#34;&#34;
+
+    def __init__(self, results_dict, normalize_factor=1):
+        &#34;&#34;&#34;
+        Create and initializes a MetricStats object.
+
+        Parameters
+        ----------
+        results_dict: dict
+            {node:value} dict with metric values.
+        normalize_factor: float
+            Factor to perform normalization
+
+        &#34;&#34;&#34;
+        self._results = results_dict
+        self._normalize_factor = normalize_factor
+        self._normalized = False
+        self._build_index()
+
+    def __getitem__(self, index):
+        &#34;&#34;&#34;
+        Metric value for package &#39;index&#39;.
+
+        Parameters
+        ----------
+        index: identifier
+            Identifier of package.
+
+        Returns
+        -------
+        value: int
+            Metric value for package &#39;index&#39;.
+
+        &#34;&#34;&#34;
+        return self._results[index]
+
+    def _build_index(self):
+        self._values = np.array([self.results_dict[k] for k in self.results_dict], dtype=np.float64)
+        self._keys = np.array([k for k in self.results_dict.keys()])
+        sorted_indexes = np.flip(np.argsort(self._values))
+        self._sorted_keys = self._keys[sorted_indexes]
+
+    def top(self, n=1, subset=None):
+        &#34;&#34;&#34;
+        Return the top &#39;n&#39; elements according to its metric value.
+
+        Parameters
+        ----------
+        n: int
+            number of top packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
+
+        Returns
+        -------
+        result: list of duples
+            List of top n (package, metric value) tuples.
+
+        &#34;&#34;&#34;
+        if subset:
+            result = []
+            for k in self._sorted_keys:
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[:n]]
+
+    def bottom(self, n=1, subset=None):
+        &#34;&#34;&#34;
+        Return the bottom &#39;n&#39; elements according to its metric value.
+
+        Parameters
+        ----------
+        n: int
+            number of bottom packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
+
+        Returns
+        -------
+        result: list of duples
+            List of bottom n (package, metric value) tuples.
+
+        &#34;&#34;&#34;
+        if subset:
+            result = []
+            for k in reversed(self._sorted_keys):
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[-n:]]
+
+
+    @property
+    def values(self):
+        &#34;&#34;&#34;Return array with metric values.&#34;&#34;&#34;
+        return self._values
+
+    @property
+    def keys(self):
+        &#34;&#34;&#34;Return package names.&#34;&#34;&#34;
+        return self._keys
+
+    @property
+    def results_dict(self):
+        &#34;&#34;&#34;Return metric values in a package:value dictionary.&#34;&#34;&#34;
+        return self._results
+
+    @property
+    def normalize_factor(self):
+        &#34;&#34;&#34;Return factor used for performing metric normalization.&#34;&#34;&#34;
+        return self._normalize_factor
+
+    def normalize(self):
+        &#34;&#34;&#34;Perform metric normalization.&#34;&#34;&#34;
+        if self._normalized or self._normalize_factor == 1:
+            return
+        for k in self._results:
+            self._results[k] = self._results[k] / self._normalize_factor
+        self._normalized = True
+        self._build_index()
+
+    def __add__(self, other):
+        &#34;&#34;&#34;Add metric values element-wise or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] + other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] + other[e] for e in self.keys})
+
+    def __sub__(self, other):
+        &#34;&#34;&#34;Subtract metric values element-wise or a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] - other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] - other[e] for e in self.keys})
+
+    def __mul__(self, other):
+        &#34;&#34;&#34;Multiply metric values element-wise or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] * other for e in self.keys})
+        else:
+            return MetricStats({e: np.multiply(self[e], other[e], dtype=np.int64) for e in self.keys})
+
+    def __truediv__(self, other):
+        &#34;&#34;&#34;Divide metric values element-wise or with a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: np.true_divide(self[e], other, dtype=np.float64) for e in self.keys})
+        else:
+            return MetricStats({e: np.true_divide(self[e], other[e], dtype=np.float64) for e in self.keys})
+
+    def __pow__(self, other):
+        &#34;&#34;&#34;Power metric values element-wise  or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] ** other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] ** other[e] for e in self.keys})</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="olivia.packagemetrics.DependenciesCount"><code class="flex name class">
+<span>class <span class="ident">DependenciesCount</span></span>
+<span>(</span><span>olivia_model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dependencies Count Metric.</p>
+<p>Number of direct dependencies of a package.</p>
+<p>Create a DependenciesCount metric object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>olivia_model</code></strong> :&ensp;<code>OliviaModel</code></dt>
+<dd>Input network.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DependenciesCount:
+    &#34;&#34;&#34;
+    Dependencies Count Metric.
+
+    Number of direct dependencies of a package.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model):
+        &#34;&#34;&#34;
+        Create a DependenciesCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        &#34;&#34;&#34;
+        self.net = olivia_model
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Dependencies Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Dependencies Count&#34;)
+        return MetricStats({package: self.net.network.in_degree(package) for package in self.net.network})</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.DependenciesCount.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the Dependencies Count metric for each package in the network.</p>
+<h2 id="returns">Returns</h2>
+<pre><code>ms: A ~MetricStats object with the results of the computation.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the Dependencies Count metric for each package in the network.
+
+    Returns
+    -------
+        ms: A ~MetricStats object with the results of the computation.
+
+    &#34;&#34;&#34;
+    print(&#34;Computing Dependencies Count&#34;)
+    return MetricStats({package: self.net.network.in_degree(package) for package in self.net.network})</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.packagemetrics.DependentsCount"><code class="flex name class">
+<span>class <span class="ident">DependentsCount</span></span>
+<span>(</span><span>olivia_model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Dependents Count Metric.</p>
+<p>Number of direct dependents of a package.</p>
+<p>Create a DependentsCount metric object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>olivia_model</code></strong> :&ensp;<code>OliviaModel</code></dt>
+<dd>Input network.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DependentsCount:
+    &#34;&#34;&#34;
+    Dependents Count Metric.
+
+    Number of direct dependents of a package.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model):
+        &#34;&#34;&#34;
+        Create a DependentsCount metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+
+        &#34;&#34;&#34;
+        self.net = olivia_model
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Dependents Count metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Dependents Count&#34;)
+        return MetricStats({package: self.net.network.out_degree(package) for package in self.net.network})</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.DependentsCount.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the Dependents Count metric for each package in the network.</p>
+<h2 id="returns">Returns</h2>
+<pre><code>ms: A ~MetricStats object with the results of the computation.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the Dependents Count metric for each package in the network.
+
+    Returns
+    -------
+        ms: A ~MetricStats object with the results of the computation.
+
+    &#34;&#34;&#34;
+    print(&#34;Computing Dependents Count&#34;)
+    return MetricStats({package: self.net.network.out_degree(package) for package in self.net.network})</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.packagemetrics.Impact"><code class="flex name class">
+<span>class <span class="ident">Impact</span></span>
+<span>(</span><span>olivia_model, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Olivia Impact Metric.</p>
+<p>IMPACT(n) is the number of dependencies induced by a package 'n', or the size of the edge set
+of the subgraph induced by transitive descendants of n. It is the amount of dependencies that would be potentially
+compromised in the network by a defect in 'n'.</p>
+<p>Create an Impact metric object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>olivia_model</code></strong> :&ensp;<code>OliviaModel</code></dt>
+<dd>Input network.</dd>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>**kwargs</code></dt>
+<dd>Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Impact(AscendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Impact Metric.
+
+    IMPACT(n) is the number of dependencies induced by a package &#39;n&#39;, or the size of the edge set
+    of the subgraph induced by transitive descendants of n. It is the amount of dependencies that would be potentially
+    compromised in the network by a defect in &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create an Impact metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        odegree = olivia_model.dag.out_degree(weight=&#39;weight&#39;)
+        intra_edges = np.array([olivia_model.dag.nodes[n][&#39;intra_edges&#39;] for n in olivia_model.dag])
+        self._out = np.array([odegree[n] for n in olivia_model.dag]) + intra_edges
+
+    def _aggregation(self, n, descendants):
+        return self._out[descendants].sum() + self._out[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Impact metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Impact&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._out.sum())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="olivia.lib.aggregators.AscendentAggregator" href="lib/aggregators.html#olivia.lib.aggregators.AscendentAggregator">AscendentAggregator</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.Impact.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the Impact metric for each package in the network.</p>
+<h2 id="returns">Returns</h2>
+<pre><code>ms: A ~MetricStats object with the results of the computation.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the Impact metric for each package in the network.
+
+    Returns
+    -------
+        ms: A ~MetricStats object with the results of the computation.
+
+    &#34;&#34;&#34;
+    print(&#34;Computing Impact&#34;)
+    return MetricStats(super().compute(), normalize_factor=self._out.sum())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats"><code class="flex name class">
+<span>class <span class="ident">MetricStats</span></span>
+<span>(</span><span>results_dict, normalize_factor=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A helper class to store and manipulate Olivia metrics.</p>
+<p>Create and initializes a MetricStats object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>results_dict</code></strong> :&ensp;<code>dict</code></dt>
+<dd>{node:value} dict with metric values.</dd>
+<dt><strong><code>normalize_factor</code></strong> :&ensp;<code>float</code></dt>
+<dd>Factor to perform normalization</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MetricStats:
+    &#34;&#34;&#34;A helper class to store and manipulate Olivia metrics.&#34;&#34;&#34;
+
+    def __init__(self, results_dict, normalize_factor=1):
+        &#34;&#34;&#34;
+        Create and initializes a MetricStats object.
+
+        Parameters
+        ----------
+        results_dict: dict
+            {node:value} dict with metric values.
+        normalize_factor: float
+            Factor to perform normalization
+
+        &#34;&#34;&#34;
+        self._results = results_dict
+        self._normalize_factor = normalize_factor
+        self._normalized = False
+        self._build_index()
+
+    def __getitem__(self, index):
+        &#34;&#34;&#34;
+        Metric value for package &#39;index&#39;.
+
+        Parameters
+        ----------
+        index: identifier
+            Identifier of package.
+
+        Returns
+        -------
+        value: int
+            Metric value for package &#39;index&#39;.
+
+        &#34;&#34;&#34;
+        return self._results[index]
+
+    def _build_index(self):
+        self._values = np.array([self.results_dict[k] for k in self.results_dict], dtype=np.float64)
+        self._keys = np.array([k for k in self.results_dict.keys()])
+        sorted_indexes = np.flip(np.argsort(self._values))
+        self._sorted_keys = self._keys[sorted_indexes]
+
+    def top(self, n=1, subset=None):
+        &#34;&#34;&#34;
+        Return the top &#39;n&#39; elements according to its metric value.
+
+        Parameters
+        ----------
+        n: int
+            number of top packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
+
+        Returns
+        -------
+        result: list of duples
+            List of top n (package, metric value) tuples.
+
+        &#34;&#34;&#34;
+        if subset:
+            result = []
+            for k in self._sorted_keys:
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[:n]]
+
+    def bottom(self, n=1, subset=None):
+        &#34;&#34;&#34;
+        Return the bottom &#39;n&#39; elements according to its metric value.
+
+        Parameters
+        ----------
+        n: int
+            number of bottom packages to retrieve.
+        subset: container of nodes
+            subset of packages to limit the ranking to
+
+        Returns
+        -------
+        result: list of duples
+            List of bottom n (package, metric value) tuples.
+
+        &#34;&#34;&#34;
+        if subset:
+            result = []
+            for k in reversed(self._sorted_keys):
+                if k in subset:
+                    result.append((k, self._results[k]))
+                if len(result) == n:
+                    break
+            return result
+        else:
+            return [(k, self._results[k]) for k in self._sorted_keys[-n:]]
+
+
+    @property
+    def values(self):
+        &#34;&#34;&#34;Return array with metric values.&#34;&#34;&#34;
+        return self._values
+
+    @property
+    def keys(self):
+        &#34;&#34;&#34;Return package names.&#34;&#34;&#34;
+        return self._keys
+
+    @property
+    def results_dict(self):
+        &#34;&#34;&#34;Return metric values in a package:value dictionary.&#34;&#34;&#34;
+        return self._results
+
+    @property
+    def normalize_factor(self):
+        &#34;&#34;&#34;Return factor used for performing metric normalization.&#34;&#34;&#34;
+        return self._normalize_factor
+
+    def normalize(self):
+        &#34;&#34;&#34;Perform metric normalization.&#34;&#34;&#34;
+        if self._normalized or self._normalize_factor == 1:
+            return
+        for k in self._results:
+            self._results[k] = self._results[k] / self._normalize_factor
+        self._normalized = True
+        self._build_index()
+
+    def __add__(self, other):
+        &#34;&#34;&#34;Add metric values element-wise or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] + other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] + other[e] for e in self.keys})
+
+    def __sub__(self, other):
+        &#34;&#34;&#34;Subtract metric values element-wise or a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] - other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] - other[e] for e in self.keys})
+
+    def __mul__(self, other):
+        &#34;&#34;&#34;Multiply metric values element-wise or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] * other for e in self.keys})
+        else:
+            return MetricStats({e: np.multiply(self[e], other[e], dtype=np.int64) for e in self.keys})
+
+    def __truediv__(self, other):
+        &#34;&#34;&#34;Divide metric values element-wise or with a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: np.true_divide(self[e], other, dtype=np.float64) for e in self.keys})
+        else:
+            return MetricStats({e: np.true_divide(self[e], other[e], dtype=np.float64) for e in self.keys})
+
+    def __pow__(self, other):
+        &#34;&#34;&#34;Power metric values element-wise  or to a numeric constant.&#34;&#34;&#34;
+        if isinstance(other, numbers.Number):
+            return MetricStats({e: self[e] ** other for e in self.keys})
+        else:
+            return MetricStats({e: self[e] ** other[e] for e in self.keys})</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="olivia.packagemetrics.MetricStats.keys"><code class="name">var <span class="ident">keys</span></code></dt>
+<dd>
+<div class="desc"><p>Return package names.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def keys(self):
+    &#34;&#34;&#34;Return package names.&#34;&#34;&#34;
+    return self._keys</code></pre>
+</details>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats.normalize_factor"><code class="name">var <span class="ident">normalize_factor</span></code></dt>
+<dd>
+<div class="desc"><p>Return factor used for performing metric normalization.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def normalize_factor(self):
+    &#34;&#34;&#34;Return factor used for performing metric normalization.&#34;&#34;&#34;
+    return self._normalize_factor</code></pre>
+</details>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats.results_dict"><code class="name">var <span class="ident">results_dict</span></code></dt>
+<dd>
+<div class="desc"><p>Return metric values in a package:value dictionary.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def results_dict(self):
+    &#34;&#34;&#34;Return metric values in a package:value dictionary.&#34;&#34;&#34;
+    return self._results</code></pre>
+</details>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats.values"><code class="name">var <span class="ident">values</span></code></dt>
+<dd>
+<div class="desc"><p>Return array with metric values.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def values(self):
+    &#34;&#34;&#34;Return array with metric values.&#34;&#34;&#34;
+    return self._values</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.MetricStats.bottom"><code class="name flex">
+<span>def <span class="ident">bottom</span></span>(<span>self, n=1, subset=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the bottom 'n' elements according to its metric value.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of bottom packages to retrieve.</dd>
+<dt><strong><code>subset</code></strong> :&ensp;<code>container</code> of <code>nodes</code></dt>
+<dd>subset of packages to limit the ranking to</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>list</code> of <code>duples</code></dt>
+<dd>List of bottom n (package, metric value) tuples.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bottom(self, n=1, subset=None):
+    &#34;&#34;&#34;
+    Return the bottom &#39;n&#39; elements according to its metric value.
+
+    Parameters
+    ----------
+    n: int
+        number of bottom packages to retrieve.
+    subset: container of nodes
+        subset of packages to limit the ranking to
+
+    Returns
+    -------
+    result: list of duples
+        List of bottom n (package, metric value) tuples.
+
+    &#34;&#34;&#34;
+    if subset:
+        result = []
+        for k in reversed(self._sorted_keys):
+            if k in subset:
+                result.append((k, self._results[k]))
+            if len(result) == n:
+                break
+        return result
+    else:
+        return [(k, self._results[k]) for k in self._sorted_keys[-n:]]</code></pre>
+</details>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats.normalize"><code class="name flex">
+<span>def <span class="ident">normalize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Perform metric normalization.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalize(self):
+    &#34;&#34;&#34;Perform metric normalization.&#34;&#34;&#34;
+    if self._normalized or self._normalize_factor == 1:
+        return
+    for k in self._results:
+        self._results[k] = self._results[k] / self._normalize_factor
+    self._normalized = True
+    self._build_index()</code></pre>
+</details>
+</dd>
+<dt id="olivia.packagemetrics.MetricStats.top"><code class="name flex">
+<span>def <span class="ident">top</span></span>(<span>self, n=1, subset=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the top 'n' elements according to its metric value.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of top packages to retrieve.</dd>
+<dt><strong><code>subset</code></strong> :&ensp;<code>container</code> of <code>nodes</code></dt>
+<dd>subset of packages to limit the ranking to</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>result</code></strong> :&ensp;<code>list</code> of <code>duples</code></dt>
+<dd>List of top n (package, metric value) tuples.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def top(self, n=1, subset=None):
+    &#34;&#34;&#34;
+    Return the top &#39;n&#39; elements according to its metric value.
+
+    Parameters
+    ----------
+    n: int
+        number of top packages to retrieve.
+    subset: container of nodes
+        subset of packages to limit the ranking to
+
+    Returns
+    -------
+    result: list of duples
+        List of top n (package, metric value) tuples.
+
+    &#34;&#34;&#34;
+    if subset:
+        result = []
+        for k in self._sorted_keys:
+            if k in subset:
+                result.append((k, self._results[k]))
+            if len(result) == n:
+                break
+        return result
+    else:
+        return [(k, self._results[k]) for k in self._sorted_keys[:n]]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.packagemetrics.Reach"><code class="flex name class">
+<span>class <span class="ident">Reach</span></span>
+<span>(</span><span>olivia_model, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Olivia Reach Metric.</p>
+<p>REACH(n) is the number of transitive descendants for a package 'n', i.e. the number of
+potentially affected packages by a defect in 'n'.</p>
+<p>Create a Reach metric object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>olivia_model</code></strong> :&ensp;<code>OliviaModel</code></dt>
+<dd>Input network.</dd>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>**kwargs</code></dt>
+<dd>Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Reach(AscendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Reach Metric.
+
+    REACH(n) is the number of transitive descendants for a package &#39;n&#39;, i.e. the number of
+    potentially affected packages by a defect in &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create a Reach metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x][&#39;members&#39;]) for x in olivia_model.dag])
+
+    def _aggregation(self, n, descendants):
+        return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Reach metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Reach&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="olivia.lib.aggregators.AscendentAggregator" href="lib/aggregators.html#olivia.lib.aggregators.AscendentAggregator">AscendentAggregator</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.Reach.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the Reach metric for each package in the network.</p>
+<h2 id="returns">Returns</h2>
+<pre><code>ms: A ~MetricStats object with the results of the computation.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the Reach metric for each package in the network.
+
+    Returns
+    -------
+        ms: A ~MetricStats object with the results of the computation.
+
+    &#34;&#34;&#34;
+    print(&#34;Computing Reach&#34;)
+    return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="olivia.packagemetrics.Surface"><code class="flex name class">
+<span>class <span class="ident">Surface</span></span>
+<span>(</span><span>olivia_model, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Olivia Surface Metric.</p>
+<p>SURFACE(n) is the number of transitive ascendants of a package 'n', i.e the number
+of packets in which a defect would potentially cause the compromise of 'n'.</p>
+<p>Create an Impact metric object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>olivia_model</code></strong> :&ensp;<code>OliviaModel</code></dt>
+<dd>Input network.</dd>
+<dt><strong><code>kwargs</code></strong> :&ensp;<code>**kwargs</code></dt>
+<dd>Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+Use 'compression_threshold' and 'save_memory' to adjust computation to available RAM.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Surface(DescendentAggregator):
+    &#34;&#34;&#34;
+    Olivia Surface Metric.
+
+    SURFACE(n) is the number of transitive ascendants of a package &#39;n&#39;, i.e the number
+    of packets in which a defect would potentially cause the compromise of &#39;n&#39;.
+    &#34;&#34;&#34;
+
+    def __init__(self, olivia_model, **kwargs):
+        &#34;&#34;&#34;
+        Create an Impact metric object.
+
+        Parameters
+        ----------
+        olivia_model: OliviaModel
+            Input network.
+        kwargs: **kwargs
+            Parameters for ~olivia.lib.aggregators.AscendentAggregator.
+            Use &#39;compression_threshold&#39; and &#39;save_memory&#39; to adjust computation to available RAM.
+
+        &#34;&#34;&#34;
+        super().__init__(olivia_model.dag,
+                         mapping=olivia_model.dag.graph[&#39;mapping&#39;],
+                         **kwargs)
+        self._scc_sizes = np.array([len(olivia_model.dag.nodes[x][&#39;members&#39;]) for x in olivia_model.dag])
+
+    def _aggregation(self, n, descendants):
+        return self._scc_sizes[descendants].sum() + self._scc_sizes[n]
+
+    def compute(self):
+        &#34;&#34;&#34;
+        Compute the Surface metric for each package in the network.
+
+        Returns
+        -------
+            ms: A ~MetricStats object with the results of the computation.
+
+        &#34;&#34;&#34;
+        print(&#34;Computing Surface&#34;)
+        return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="olivia.lib.aggregators.DescendentAggregator" href="lib/aggregators.html#olivia.lib.aggregators.DescendentAggregator">DescendentAggregator</a></li>
+<li><a title="olivia.lib.aggregators.AscendentAggregator" href="lib/aggregators.html#olivia.lib.aggregators.AscendentAggregator">AscendentAggregator</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="olivia.packagemetrics.Surface.compute"><code class="name flex">
+<span>def <span class="ident">compute</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compute the Surface metric for each package in the network.</p>
+<h2 id="returns">Returns</h2>
+<pre><code>ms: A ~MetricStats object with the results of the computation.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute(self):
+    &#34;&#34;&#34;
+    Compute the Surface metric for each package in the network.
+
+    Returns
+    -------
+        ms: A ~MetricStats object with the results of the computation.
+
+    &#34;&#34;&#34;
+    print(&#34;Computing Surface&#34;)
+    return MetricStats(super().compute(), normalize_factor=self._scc_sizes.sum())</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="olivia" href="index.html">olivia</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="olivia.packagemetrics.DependenciesCount" href="#olivia.packagemetrics.DependenciesCount">DependenciesCount</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.packagemetrics.DependenciesCount.compute" href="#olivia.packagemetrics.DependenciesCount.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.packagemetrics.DependentsCount" href="#olivia.packagemetrics.DependentsCount">DependentsCount</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.packagemetrics.DependentsCount.compute" href="#olivia.packagemetrics.DependentsCount.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.packagemetrics.Impact" href="#olivia.packagemetrics.Impact">Impact</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.packagemetrics.Impact.compute" href="#olivia.packagemetrics.Impact.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.packagemetrics.MetricStats" href="#olivia.packagemetrics.MetricStats">MetricStats</a></code></h4>
+<ul class="two-column">
+<li><code><a title="olivia.packagemetrics.MetricStats.bottom" href="#olivia.packagemetrics.MetricStats.bottom">bottom</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.keys" href="#olivia.packagemetrics.MetricStats.keys">keys</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.normalize" href="#olivia.packagemetrics.MetricStats.normalize">normalize</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.normalize_factor" href="#olivia.packagemetrics.MetricStats.normalize_factor">normalize_factor</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.results_dict" href="#olivia.packagemetrics.MetricStats.results_dict">results_dict</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.top" href="#olivia.packagemetrics.MetricStats.top">top</a></code></li>
+<li><code><a title="olivia.packagemetrics.MetricStats.values" href="#olivia.packagemetrics.MetricStats.values">values</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.packagemetrics.Reach" href="#olivia.packagemetrics.Reach">Reach</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.packagemetrics.Reach.compute" href="#olivia.packagemetrics.Reach.compute">compute</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="olivia.packagemetrics.Surface" href="#olivia.packagemetrics.Surface">Surface</a></code></h4>
+<ul class="">
+<li><code><a title="olivia.packagemetrics.Surface.compute" href="#olivia.packagemetrics.Surface.compute">compute</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
