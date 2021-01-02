@@ -8,8 +8,16 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=dsr0018_olivia&metric=security_rating)](https://sonarcloud.io/dashboard?id=dsr0018_olivia)
 
-Open-source Library Indexes Vulnerability Identification and Analysis
+_**Open-source Library Indexes Vulnerability Identification and Analysis**_
 
 The use of libraries from open source package repositories to reduce development time and cost is almost universal, regarding all languages and types of software projects.  However, their inclusion introduces risks such as exposure to bugs and malicious modifications, those derived from the maintenance and updating of the software and, ultimately, all those inherent in the functional dependence on a third party. These risks can be difficult to appreciate in their entirety by the developers, who only explicitly import a small part of the libraries used in each project. Due to the transitivity of dependencies, a single defect or modification can have extensive and difficult-to-predict effects on the software ecosystem.
 
 In this project we will build a packet dependency network model for the analysis of its vulnerability to failures and attacks. Our aim is to contribute to improve the risk assessment of external dependencies in software projects, the design of package management tools and the organization of activities and resources in open source development ecosystems.
+
+Olivia implements part of the results from the author's final year project for the BSc in Computer Science Engineering at the University of Burgos. Work tutored by Prof. Carlos López Nozal and Prof. Jose Ignacio Santos Martín.
+## License
+Copyright (c) 2021 Daniel Setó Rey
+
+OLIVIA is distributed under the MIT License. See LICENSE file for details.
+
+Dependency Network Models in /data are built from libraries.io snapshots by Tidelift (https://libraries.io/data) and are made available under the CC BY-SA 4.0 License (https://creativecommons.org/licenses/by-sa/4.0/) 
