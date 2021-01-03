@@ -10,11 +10,30 @@
 
 _**Open-source Library Indexes Vulnerability Identification and Analysis**_
 
-The use of libraries from open source package repositories to reduce development time and cost is almost universal, regarding all languages and types of software projects.  However, their inclusion introduces risks such as exposure to bugs and malicious modifications, those derived from the maintenance and updating of the software and, ultimately, all those inherent in the functional dependence on a third party. These risks can be difficult to appreciate in their entirety by the developers, who only explicitly import a small part of the libraries used in each project. Due to the transitivity of dependencies, a single defect or modification can have extensive and difficult-to-predict effects on the software ecosystem.
+The use of centralized library repositories (such as PyPI for Python, Maven for Java, npm for Node.js, CRAN for R, etc.) to reduce development times and costs is universal, in virtually all languages and types of software projects. Due to the transitivity of dependencies, the appearance of a single defect in the repository can have extensive and difficult-to-predict effects on the ecosystem. These defects cause functional errors or performance or security problems. The risk is difficult to grasp for developers, who only explicitly import a small part of the dependencies.
 
-In this project we will build a packet dependency network model for the analysis of its vulnerability to failures and attacks. Our aim is to contribute to improve the risk assessment of external dependencies in software projects, the design of package management tools and the organization of activities and resources in open source development ecosystems.
+OLVIA uses an approach based on the vulnerability of the dependency network of software packages, which measures how sensitive the repository is to the random introduction of defects. The goals of the model are to contribute to the understanding of propagation mechanisms of software defects and to study feasible protection strategies. 
 
-Olivia implements part of the results from the author's final year project for the BSc in Computer Science Engineering at the University of Burgos. Work tutored by Prof. Carlos López Nozal and Prof. Jose Ignacio Santos Martín.
+OLIVIA implements part of the results from the author's final year project for the BSc in Computer Science Engineering at the University of Burgos. Work tutored by Prof. Carlos López Nozal and Prof. Jose Ignacio Santos Martín.
+
+## Intended audience
+OLIVIA may be of interest to multiple parties:
+* __Centralised package managers__, to establish policies and manual or automatic control processes that improve the security and stability of the repositories.
+* __Software developers__ in general, to assess the different risks introduced by the dependencies used in their projects, and __package developers__ in particular to understand their responsibility on the ecosystem.
+* Developers of __continuous quality tools__, to define the concept of vulnerability based on the modeling of the network of package dependencies.
+
+## Key results
+The results obtained suggest that:
+
+* Network’s vulnerability is related to the size of the largest strongly connected component present, a structure caused by the appearance of cyclic dependencies. When this component has a significant size the vulnerability of the network is much greater. By protecting these packets to avoid the introduction or propagation of defects we can almost completely eliminate the network’s vulnerability, although depending on their number, this approach may not be useful in practice. 
+* We use a variety of techniques to narrow down the sets of important packets in relation to the network’s vulnerability, achieving reductions of a similar magnitude by acting on a smaller number of packages, and to heuristically select a specific number of packages, a problem whose exact solution we prove to be intractable.
+* Example models for PyPI and Maven are provided. Models for other package repositories are easy to build from arbitrary dependency data.
+
+## Getting started
+Jupyter notebooks in the root folder of the repository (*A-Model.ipynb*, *B-Analysis.ipynb*, *C-Immunization.ipynb*) contain a user guide covering the main use cases for the library. 
+
+OLIVIA API documentation is contained in */docs* and may be accessed through https://dsr0018.github.io/olivia/ 
+
 ## License
 Copyright (c) 2021 Daniel Setó Rey
 

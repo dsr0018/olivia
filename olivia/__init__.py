@@ -15,16 +15,4 @@ Copyright (c) 2021 Daniel Setó Rey
 
 OLIVIA is distributed under the MIT License. See LICENSE file for details.
 Includes tools for the analysis of package dependency networks vulnerability to failures and attacks.
-
-model.py: Olivia network model.
-OliviaNetwork includes methods for building and manipulating models.
-
-packagemetrics.py: Package level network-wide metrics.
-MetricStats include tools to store and manipulate Olivia metrics.
-
-networkmetrics.py: Network vulnerability measures.
-
-coupling.py: Coupling characterizes the local structure of the transitive dependency relation between packages.
-
-immunization.py: Immunization analyzes in which packages it is better to invest to protect the network as a whole.
 """
