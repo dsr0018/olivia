@@ -1,4 +1,5 @@
 # OLIVIA
+[![DOI](https://zenodo.org/badge/269325388.svg)](https://zenodo.org/badge/latestdoi/269325388)
 
 [![Build Status](https://travis-ci.com/dsr0018/olivia.svg?branch=master)](https://travis-ci.com/dsr0018/olivia)
 [![codecov](https://codecov.io/gh/dsr0018/olivia/branch/master/graph/badge.svg)](https://codecov.io/gh/dsr0018/olivia)
